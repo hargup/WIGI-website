@@ -1,0 +1,2 @@
+Sitemap: https://tools.wmflabs.org/wigi/sitemapindex.xml
+
