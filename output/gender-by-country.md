@@ -9,4 +9,7 @@
 .. type: text
 -->
 
-Write your page here.
+<figure style="text-align:center; margin: 40px 0;">
+<img src="data/by-culture.png" height="400px"></img>
+<figcaption> Lorem ipsum </figcaption>
+</figure>

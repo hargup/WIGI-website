@@ -12,4 +12,13 @@
 
 footer {
     text-align: center;
+    height: 80px;
+    margin: 20px 0;
+}
+
+#country-graph {
+    position: relative;
+    height: 550px;
+    overflow: hidden;
+    margin: 0 auto;
 }

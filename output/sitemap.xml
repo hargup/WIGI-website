@@ -6,47 +6,51 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://tools.wmflabs.org/wigi/2015/index.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/archive.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
+ </url>
+ <url>
+  <loc>https://tools.wmflabs.org/wigi/bar.html</loc>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/blog/index.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/categories/index.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/galleries/index.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/gender-by-country.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/gender-by-culture.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/gender-by-date-of-birth.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/index.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/listings/index.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/posts/index.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/posts/wigi.html</loc>
@@ -70,6 +74,6 @@
  </url>
  <url>
   <loc>https://tools.wmflabs.org/wigi/wikipedia-language-by-gender.html</loc>
-  <lastmod>2015-06-09</lastmod>
+  <lastmod>2015-06-13</lastmod>
  </url>
 </urlset>
