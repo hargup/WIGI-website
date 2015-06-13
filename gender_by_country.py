@@ -1,9 +1,12 @@
-import world_countries as wc
-from bokeh.plotting import figure, output_file, save
-import numpy as np
-from bokeh.models import HoverTool, ColumnDataSource
-import csv
 from collections import OrderedDict
+from bokeh.plotting import figure, output_file, save
+from bokeh.models import HoverTool, ColumnDataSource
+from bokeh.embed import components
+from bokeh.resources import INLINE
+from bokeh.templates import RESOURCES
+import world_countries as wc
+import numpy as np
+import csv
 # The world countries file is taken from https://github.com/chdoig/pyladiesatx-bokeh-tutorial
 
 
@@ -33,16 +36,27 @@ source = ColumnDataSource(
             )
         )
 
-TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
-output_file("world_map.html", title="Gender by Country")
-p = figure(title="world map", tools=TOOLS)
+#TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
+#output_file("world_map.html", title="Gender by Country")
+#p = figure(title="world map", tools=TOOLS)
 
-p.patches(country_xs, country_ys, line_color="blue", fill_color=colors, source=source)
+#p.patches(country_xs, country_ys, line_color="blue", fill_color=colors, source=source)
 
-hover = p.select(dict(type=HoverTool))
-hover.point_policy = "follow_mouse"
-hover.tooltips = OrderedDict([
-    ("wigi", "@wigi_index"),
-    ("Country", "@name"),
-])
-save(p)
+#hover = p.select(dict(type=HoverTool))
+#hover.point_policy = "follow_mouse"
+#hover.tooltips = OrderedDict([
+    #("wigi", "@wigi_index"),
+    #("Country", "@name"),
+#])
+#plot_resources = RESOURCES.render(
+        #js_raw=INLINE.js_raw,
+        #css_raw=INLINE.css_raw,
+        #js_files=INLINE.js_files,
+        #css_files=INLINE.css_files,
+    #)
+
+    ## For more details see:
+    ##   http://bokeh.pydata.org/en/latest/docs/user_guide/embedding.html#components
+#script, div = components(p, INLINE)
+#print(plot_resources)
+#save(p)
