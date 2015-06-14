@@ -10,3 +10,4 @@
 -->
 
 Write your page here.
+![](./plots/gender_by_dob.png)

@@ -49,7 +49,7 @@ def create_gender_by_country_plot():
         ("Country", "@name"),
     ])
 
-    script_path = "../output/scripts/gender_by_country.js"
+    script_path = "./scripts/gender_by_country.js"
     js, tag = autoload_static(p, CDN, script_path)
 
     with open(script_path, 'w') as js_file:
