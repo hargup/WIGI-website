@@ -15,23 +15,35 @@
 
 
 
-
     
-        <!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]-->
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
 
      <script src="http://d3js.org/d3.v3.min.js"></script> <script src="http://d3js.org/topojson.v1.min.js"></script> <script src="assets/js/datamaps.world.min.js"></script>
 
 
     
+    
 
     <meta name="author" content="Vivek Rai">
     
-    <meta property="og:site_name" content="WIGI">
-    <meta property="og:title" content="Gender by Country">
-    <meta property="og:url" content="https://tools.wmflabs.org/wigi/gender-by-country.html">
-    <meta property="og:description" content="Lorem ipsum">
-    <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2015-06-09T16:25:55+05:30">
+        <meta name="og:title" content="Gender by Country">
+        <meta name="og:url" content="https://tools.wmflabs.org/wigi/gender-by-country.html">
+            <meta name="og:description" content="">
+        <meta name="og:site_name" content="WIGI">
+        <meta name="og:type" content="article">
+
+    
+
+    
+
+
+    <meta name="author" content="Vivek Rai">
+    
+        <meta name="og:title" content="Gender by Country">
+        <meta name="og:url" content="https://tools.wmflabs.org/wigi/gender-by-country.html">
+            <meta name="og:description" content="">
+        <meta name="og:site_name" content="WIGI">
+        <meta name="og:type" content="article">
 
     
 
@@ -41,11 +53,10 @@
 
 </head>
 <body>
-<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
 
 <!-- Menubar -->
 
-<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
 <!-- This keeps the margins nice -->
         <div class="navbar-header">
@@ -85,7 +96,7 @@
                 
                     
     <li>
-    <a href="gender-by-country.md" id="sourcelink">Source</a>
+    <a href="./gender-by-country.md" id="sourcelink">Source</a>
     </li>
 
                 
@@ -98,7 +109,7 @@
 
 <!-- End of Menubar -->
 
-<div class="container" id="content" role="main">
+<div class="container">
     <div class="body-content">
         <!--Body content-->
         <div class="row">
@@ -112,14 +123,12 @@
         
 
     </header>
-    <div class="e-content entry-content" itemprop="articleBody text">
-    <figure style="text-align:center; margin: 40px 0;">
-<img src="data/by-culture.png" height="400px">
-<figcaption> Lorem ipsum </figcaption>
-</figure>
-    </div>
+    <div itemprop="articleBody text">
     
+<!-- <img src="data/by-culture.png" height="400px"></img> -->
+<script src="scripts/gender_by_country.js" id="7e8b778e-0622-43d4-a67c-be22648ffaf7" async="true" data-bokeh-data="static" data-bokeh-modelid="c0cdef82-6cbc-477e-accd-d810274a55a3" data-bokeh-modeltype="Plot" data-bokeh-loglevel="info"></script>
 
+    </div>
 </article>
 
         </div>
@@ -135,14 +144,29 @@
 
             <script src="assets/js/all-nocdn.js"></script>
     
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
 
-    <script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
-    <!-- fancy dates -->
-    <script>
-    moment.locale("");
-    fancydates(0, "YYYY-MM-DD HH:mm");
-    </script>
-    <!-- end fancy dates -->
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
     
 
 
