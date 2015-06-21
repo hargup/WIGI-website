@@ -1,3 +1,4 @@
+from __future__ import print_function
 import world_countries as wc
 from bokeh.plotting import figure, output_file
 import numpy as np
@@ -17,7 +18,7 @@ def create_gender_by_country_plot():
     country_names = [world_countries[code]['name'] for code in world_countries]
 
     index_dict = dict()
-    with open('../data/gender-by-country.csv', 'r') as csvfile:
+    with open('./data/gender-by-country.csv', 'r') as csvfile:
         indexreader = csv.reader(csvfile)
         for country, index in indexreader:
             index_dict[country] = float(index)
@@ -40,7 +41,7 @@ def create_gender_by_country_plot():
     output_file("world_map.html", title="Gender by Country")
     p = figure(title="world map", tools=TOOLS)
 
-    p.patches(country_xs, country_ys, line_color="blue", fill_color=colors, source=source)
+    p.patches(country_xs, country_ys, fill_color=colors, source=source)
 
     hover = p.select(dict(type=HoverTool))
     hover.point_policy = "follow_mouse"
@@ -49,14 +50,16 @@ def create_gender_by_country_plot():
         ("Country", "@name"),
     ])
 
-    script_path = "./scripts/gender_by_country.js"
-    js, tag = autoload_static(p, CDN, script_path)
+    js_file_name = "gender_by_country.js"
+    script_path = "./scripts/"
+    output_path = "output/scripts/"
+    js, tag = autoload_static(p, CDN, script_path + js_file_name)
 
-    with open(script_path, 'w') as js_file:
+    with open(output_path + js_file_name, 'w') as js_file:
         js_file.write(js)
 
     return tag
 
 
 if __name__ == "__main__":
-    print create_gender_by_country_plot()
+    print(create_gender_by_country_plot())
