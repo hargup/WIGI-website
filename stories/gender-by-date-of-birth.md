@@ -7,7 +7,7 @@
 .. link: 
 .. description: 
 .. type: text
+.. template: gender_by_dob.tmpl
 -->
 
-Write your page here.
-![](./plots/gender_by_dob.png)
+Gender by DOB
