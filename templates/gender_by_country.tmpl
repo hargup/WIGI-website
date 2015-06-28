@@ -8,11 +8,14 @@
     ${helper.twitter_card_information(post)}
 </%block>
 
+
 <%block name="content">
 <article class="storypage" itemscope="itemscope" itemtype="http://schema.org/Article">
     <div itemprop="articleBody text">
     ${post.text()}
     </div>
-<p> Rand123 </p>
+<%block name="plot">
+    ${create_gender_by_country_plot}
+</%block>
 </article>
 </%block>

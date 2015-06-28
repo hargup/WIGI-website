@@ -2,7 +2,11 @@
 
 from __future__ import unicode_literals
 import time
+from gender_by_country import create_gender_by_country_plot
+# import code
 
+# js = create_gender_by_country_plot()
+js = create_gender_by_country_plot()
 # !! This is the configuration of Nikola. !! #
 # !!  You should edit it to your liking.  !! #
 
@@ -1008,7 +1012,9 @@ LOGGING_HANDLERS = {
 
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
-GLOBAL_CONTEXT = {}
+GLOBAL_CONTEXT = {
+        "create_gender_by_country_plot": js
+        }
 
 # Add functions here and they will be called with template
 # GLOBAL_CONTEXT as parameter when the template is about to be
