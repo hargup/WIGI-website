@@ -59,6 +59,3 @@ target/
 
 .doit.*
 cache/*
-
-# Output directory
-output
