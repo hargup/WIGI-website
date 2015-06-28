@@ -1,9 +1,6 @@
 import pandas
-import matplotlib.pyplot as plt
-import matplotlib
-from bokeh.charts import TimeSeries, output_file, save
-from bokeh.models import DatetimeTickFormatter
-from bokeh.plotting import figure, gridplot
+from bokeh.charts import TimeSeries
+from bokeh.plotting import gridplot
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 import dateutil
@@ -31,10 +28,10 @@ def create_gender_by_dob_plot():
         nonbindox[acro] = nonbinra
 
     time_range = (1400, 2014)
-    output_file("gender_by_dob.html")
 
     dox = dox[time_range[0]: time_range[1]]
-    dox['Date'] = [dateutil.parser.parse(str(int(x))) for x in dox['dob'].keys()]
+    dox['Date'] = [dateutil.parser.parse(str(int(x)))
+                   for x in dox['dob'].keys()]
 
     p1 = TimeSeries(dox, index='Date', legend=True, title="Female Ratios")
     p1.below[0].formatter.formats = dict(years=['%Y'])
