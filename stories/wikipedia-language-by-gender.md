@@ -7,16 +7,7 @@
 .. link:
 .. description:
 .. type: text
+.. template: wikipedia_language_by_gender.tmpl
 -->
 
-<script
-    src="./scripts/language_by_gender.js"
-    id="e9ab7b57-9009-4939-b449-09342ab64e22"
-    async="true"
-    data-bokeh-data="static"
-    data-bokeh-modelid="4357ee04-b899-498a-9fd3-6a62aeb73232"
-    data-bokeh-modeltype="Plot"
-    data-bokeh-loglevel="info"
-></script>
-
-Write your page here.
+Wikipedia language by Gender Plot
