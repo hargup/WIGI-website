@@ -1,6 +1,6 @@
 from __future__ import print_function
 import world_countries as wc
-from bokeh.plotting import figure, output_file
+from bokeh.plotting import figure
 import numpy as np
 from bokeh.models import HoverTool, ColumnDataSource
 import csv
@@ -8,7 +8,6 @@ from collections import OrderedDict
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 # The world countries file is taken from https://github.com/chdoig/pyladiesatx-bokeh-tutorial
-
 
 def create_gender_by_country_plot():
     world_countries = wc.data.copy()
@@ -27,8 +26,9 @@ def create_gender_by_country_plot():
 
     colors = [
         "#%02x%02x%02x" % (r, g, b) for r, g, b in
-        zip(np.floor(250*(1-index_vals)), np.floor(200*(1-index_vals)), np.floor(100*index_vals))
-    ]
+        zip(np.floor(250*(1-index_vals)),
+            np.floor(200*(1-index_vals)),
+            np.floor(100*index_vals))]
 
     source = ColumnDataSource(
             data=dict(
@@ -38,7 +38,6 @@ def create_gender_by_country_plot():
             )
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
-    output_file("world_map.html", title="Gender by Country")
     p = figure(title="world map", tools=TOOLS)
 
     p.patches(country_xs, country_ys, fill_color=colors, source=source)
@@ -52,7 +51,7 @@ def create_gender_by_country_plot():
 
     js_file_name = "gender_by_country.js"
     script_path = "./scripts/"
-    output_path = "output/scripts/"
+    output_path = "./output/scripts/"
     js, tag = autoload_static(p, CDN, script_path + js_file_name)
 
     with open(output_path + js_file_name, 'w') as js_file:

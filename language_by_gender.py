@@ -41,7 +41,6 @@ def create_language_by_gender_plot():
             )
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
-    output_file("language_by_gender.html", title="Language by Gender")
 
     p = figure(x_axis_type="log", x_range=[0.1, 10**6], y_range=[0, 1],
                title="Language by Gender", tools=TOOLS)
