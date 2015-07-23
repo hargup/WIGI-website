@@ -5,8 +5,8 @@ import time
 from gender_by_country import create_gender_by_country_plot
 from language_by_gender import create_language_by_gender_plot
 from gender_by_dob import create_gender_by_dob_plot
+from gender_by_culture import create_gender_by_culture_plot
 # import code
-create_gender_by_culture_plot = lambda: ''
 
 # !! This is the configuration of Nikola. !! #
 # !!  You should edit it to your liking.  !! #
