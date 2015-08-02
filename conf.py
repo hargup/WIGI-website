@@ -1,15 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
 import time
 from plots import (gender_by_country, gender_by_dob, gender_by_culture,
                    language_by_gender)
-
-#from gender_by_country import create_gender_by_country_plot
-#from language_by_gender import create_language_by_gender_plot
-#from gender_by_dob import create_gender_by_dob_plot
-#from gender_by_culture import create_gender_by_culture_plot
-# import code
 
 # !! This is the configuration of Nikola. !! #
 # !!  You should edit it to your liking.  !! #
@@ -25,7 +18,7 @@ from plots import (gender_by_country, gender_by_dob, gender_by_culture,
 
 
 # Data about this site
-BLOG_AUTHOR = "Vivek Rai"  # (translatable)
+BLOG_AUTHOR = "WIGI Dev Team"  # (translatable)
 BLOG_TITLE = "WIGI"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
@@ -33,7 +26,7 @@ SITE_URL = "https://tools.wmflabs.org/wigi/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://tools.wmflabs.org/wigi/"
-BLOG_EMAIL = "vivekraiiitkgp@gmail.com"
+BLOG_EMAIL = "wigi-project@googlegroups.com"
 BLOG_DESCRIPTION = "A statiscal presentation of gender in articles by date of birth, place of birth, citizenship, ethnicity, occupation, and Wikipedia language."  # (translatable)
 
 # Nikola is multilingual!
