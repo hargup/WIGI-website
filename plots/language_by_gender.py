@@ -1,18 +1,13 @@
 from __future__ import print_function
+from collections import OrderedDict
 from bokeh.plotting import figure, output_file
 from bokeh.models import NumeralTickFormatter
 from bokeh.models import HoverTool, ColumnDataSource
-from collections import OrderedDict
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 
-# Here we can play arond with Size of circle by making it proportional
-# to the size of the resepecitive wikipedia
-
 
 def load_data(data_file):
-    # XXX: This is dummy data and it is possible that the original data will be
-    # in some other format.
     import csv
     lang_data = dict()
     with open(data_file, 'r') as csvfile:
@@ -24,7 +19,7 @@ def load_data(data_file):
     return lang_data
 
 
-def create_language_by_gender_plot():
+def plot():
     lang_data = load_data('./data/language_by_gender.csv')
 
     gendered_total = [lang_data[code]['gendered_total']
@@ -67,18 +62,18 @@ def create_language_by_gender_plot():
         ("Percentage Female biographies", "@fem_percent")
     ])
 
-    # Since all paths are relative and code and html file does not lie in the
-    # directory, output_dir and read_dir differs
-    output_dir = "./output/scripts/"
-    read_dir = "./scripts/"
-    js_file_name = "language_by_gender.js"
-    js, tag = autoload_static(p, CDN, read_dir + js_file_name)
+    js_filename = "language_by_gender.js"
+    output_path = "./files/assets/js/"
+    script_path = "../assets/js/"
 
-    with open(output_dir + js_file_name, 'w') as js_file:
+    # generate javascript plot and corresponding script tag
+    js, tag = autoload_static(p, CDN, script_path + js_filename)
+
+    with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
     return tag
 
 
 if __name__ == "__main__":
-    print(create_language_by_gender_plot())
+    print(plot())

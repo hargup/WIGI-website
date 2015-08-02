@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
 import time
-from gender_by_country import create_gender_by_country_plot
-from language_by_gender import create_language_by_gender_plot
-from gender_by_dob import create_gender_by_dob_plot
-from gender_by_culture import create_gender_by_culture_plot
-# import code
+from plots import (gender_by_country, gender_by_dob, gender_by_culture,
+                   language_by_gender)
 
 # !! This is the configuration of Nikola. !! #
 # !!  You should edit it to your liking.  !! #
@@ -22,7 +18,7 @@ from gender_by_culture import create_gender_by_culture_plot
 
 
 # Data about this site
-BLOG_AUTHOR = "Vivek Rai"  # (translatable)
+BLOG_AUTHOR = "WIGI Dev Team"  # (translatable)
 BLOG_TITLE = "WIGI"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
@@ -30,8 +26,8 @@ SITE_URL = "https://tools.wmflabs.org/wigi/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://tools.wmflabs.org/wigi/"
-BLOG_EMAIL = "vivekrai.iitkgp@gmail.com"
-BLOG_DESCRIPTION = "Demo site for WIGI graph demonstration"  # (translatable)
+BLOG_EMAIL = "wigi-project@googlegroups.com"
+BLOG_DESCRIPTION = "A statiscal presentation of gender in articles by date of birth, place of birth, citizenship, ethnicity, occupation, and Wikipedia language."  # (translatable)
 
 # Nikola is multilingual!
 #
@@ -151,7 +147,7 @@ THEME = "wigi-jrnl"
 # (e.g. 'Europe/Zurich')
 # Also, if you want to use a different time zone in some of your posts,
 # you can use the ISO 8601/RFC 3339 format (ex. 2012-03-30T23:00:00+02:00)
-TIMEZONE = "Asia/Kolkata"
+#TIMEZONE = "Asia/Kolkata"
 
 # If you want to use ISO 8601 (also valid RFC 3339) throughout Nikola
 # (especially in new_post), set this to True.
@@ -1014,11 +1010,11 @@ LOGGING_HANDLERS = {
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {
-        "create_gender_by_country_plot": create_gender_by_country_plot(),
-        "create_gender_by_culture_plot": create_gender_by_culture_plot(),
-        "create_gender_by_dob_plot": create_gender_by_dob_plot(),
-        "create_language_by_gender_plot": create_language_by_gender_plot()
-        }
+        "gender_by_country_plot": gender_by_country.plot(),
+        "gender_by_culture_plot": gender_by_culture.plot(),
+        "gender_by_dob_plot": gender_by_dob.plot(),
+        "language_by_gender_plot": language_by_gender.plot()
+    }
 
 # Add functions here and they will be called with template
 # GLOBAL_CONTEXT as parameter when the template is about to be

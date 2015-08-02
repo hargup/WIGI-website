@@ -1,15 +1,16 @@
 from __future__ import print_function
-import world_countries as wc
-from bokeh.plotting import figure
-import numpy as np
-from bokeh.models import HoverTool, ColumnDataSource
-import csv
 from collections import OrderedDict
+import csv
+import numpy as np
+import world_countries as wc
+from bokeh.models import HoverTool, ColumnDataSource
+from bokeh.plotting import figure
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
-# The world countries file is taken from https://github.com/chdoig/pyladiesatx-bokeh-tutorial
 
-def create_gender_by_country_plot():
+
+def plot():
+    # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
 
     country_xs = [world_countries[code]['lons'] for code in world_countries]
@@ -37,6 +38,7 @@ def create_gender_by_country_plot():
                 )
             )
 
+    # setup widgets
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
     p = figure(title="world map", tools=TOOLS)
 
@@ -49,16 +51,17 @@ def create_gender_by_country_plot():
         ("Country", "@name"),
     ])
 
-    js_file_name = "gender_by_country.js"
-    script_path = "./scripts/"
-    output_path = "./output/scripts/"
-    js, tag = autoload_static(p, CDN, script_path + js_file_name)
+    js_filename = "gender_by_country.js"
+    script_path = "../assets/js/"
+    output_path = "./files/assets/js/"
 
-    with open(output_path + js_file_name, 'w') as js_file:
+    # generate javascript plot and corresponding script tag
+    js, tag = autoload_static(p, CDN, script_path + js_filename)
+
+    with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
     return tag
 
-
 if __name__ == "__main__":
-    print(create_gender_by_country_plot())
+    print(plot())
