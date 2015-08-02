@@ -1,16 +1,18 @@
 '''
 This module exposes geometry data for World Country Boundaries.
 '''
+
 import csv
 import codecs
 import gzip
 import xml.etree.cElementTree as et
-from os.path import dirname, join
+from os.path import dirname, join, abspath
 
 nan = float('NaN')
 
 data = {}
-with gzip.open(join(dirname(__file__), 'data/World_Country_Boundaries.csv.gz')) as f:
+
+with gzip.open(abspath('./data/World_Country_Boundaries.csv.gz')) as f:
     decoded = codecs.iterdecode(f, "utf-8")
     next(decoded)
     reader = csv.reader(decoded, delimiter=',', quotechar='"')
