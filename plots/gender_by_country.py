@@ -2,7 +2,7 @@ from __future__ import print_function
 from collections import OrderedDict
 import csv
 import numpy as np
-import world_countries as wc
+from . import world_countries as wc
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
 from bokeh.resources import CDN
