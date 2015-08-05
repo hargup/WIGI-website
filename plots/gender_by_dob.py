@@ -47,7 +47,7 @@ def plot():
     p = gridplot([[p1], [p2]], toolbar_location=None)
 
     js_filename = "gender_by_dob.js"
-    script_path = "../assets/js/"
+    script_path = "./assets/js/"
     output_path = "./files/assets/js/"
 
     # generate javascript plot and corresponding script tag

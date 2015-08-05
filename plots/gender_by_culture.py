@@ -39,7 +39,7 @@ def plot():
 
     js_filename = "gender_by_culture.js"
     output_path = "./files/assets/js/"
-    script_path = "../assets/js/"
+    script_path = "./assets/js/"
 
     # generate javascript plot and corresponding script tag
     js, tag = autoload_static(p, CDN, script_path + js_filename)
