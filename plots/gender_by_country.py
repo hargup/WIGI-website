@@ -52,7 +52,7 @@ def plot():
     ])
 
     js_filename = "gender_by_country.js"
-    script_path = "../assets/js/"
+    script_path = "./assets/js/"
     output_path = "./files/assets/js/"
 
     # generate javascript plot and corresponding script tag
