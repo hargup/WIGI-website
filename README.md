@@ -28,8 +28,10 @@ Run it locally
 ==============
 
 To run the website locally, ensure that you have installed latest version of
-Nikola and Bokeh. The instructions can be found on their respective websites.
-Then run the following set of commands:
+Nikola and Bokeh. We recommended to use [conda](http://conda.pydata.org/docs/),
+which is an open source python package and environment management tool. The
+installation instructions can be found on their respective websites. Once the
+dependencies are installed, run the following set of commands:
 
 ```
 git clone https://github.com/hargup/WIGI-website
@@ -40,6 +42,10 @@ nikola build && nikola serve
 If everything goes fine, you should be able to see WIGI website at
 127.0.0.1:8000.
 
+Please note that you need use the Nikola provided server to serve the requests.
+The output of `nikola build` is a self contained, static website in the
+`output/` directory, which can be rendered by any server. A [quick python
+server](https://docs.python.org/3.5/library/http.server.html), for example.
 
 How does it work?
 =================
@@ -53,7 +59,7 @@ file is used to configure how Nikola behaves and how does it generate static
 HTML pages from templates.
 
 1. All the posts are constructed from their specific templates, which file
-   metadata and instructions on how to render the specific html page. For
+   metadata and instructions on how to render the specific HTML page. For
 example, `gender by country.md` post has the following one line in the
 description:
 
@@ -64,7 +70,9 @@ description:
 This specifies the template to be used for creating the `gender_by_country.html`
 file. The templates are located in `templates/` directory.
 
-2. Templates instruct how to build webpage and where to embed Bokeh graph. For example, if you open `gender_by_country.tmpl` for example, you can find the following block
+2. Templates instruct how to build web page and where to embed Bokeh graph. For
+   example, if you open `gender_by_country.tmpl` for example, you can find the
+following block
 ```
 <%block name="plot">
     ${gender_by_country_plot}
