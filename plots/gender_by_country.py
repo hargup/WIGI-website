@@ -18,7 +18,7 @@ def plot():
     country_names = [world_countries[code]['name'] for code in world_countries]
 
     index_dict = dict()
-    with open('./data/gender-by-country.csv', 'r') as csvfile:
+    with open('./data/worldmap-index.csv', 'r') as csvfile:
         indexreader = csv.reader(csvfile)
         for country, index in indexreader:
             index_dict[country] = float(index)

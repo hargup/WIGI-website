@@ -12,7 +12,7 @@ nan = float('NaN')
 
 data = {}
 
-with gzip.open(abspath('./data/World_Country_Boundaries.csv.gz')) as f:
+with gzip.open(abspath('./World_Country_Boundaries.csv.gz')) as f:
     decoded = codecs.iterdecode(f, "utf-8")
     next(decoded)
     reader = csv.reader(decoded, delimiter=',', quotechar='"')
