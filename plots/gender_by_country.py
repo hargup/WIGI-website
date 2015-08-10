@@ -2,7 +2,7 @@ from __future__ import print_function
 from collections import OrderedDict
 import csv
 import numpy as np
-from . import world_countries as wc
+import world_countries as wc
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
 from bokeh.resources import CDN
@@ -10,6 +10,7 @@ from bokeh.embed import autoload_static
 
 
 def plot():
+    return None
     # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
 
@@ -18,7 +19,7 @@ def plot():
     country_names = [world_countries[code]['name'] for code in world_countries]
 
     index_dict = dict()
-    with open('./data/worldmap-index.csv', 'r') as csvfile:
+    with open('/home/maximilianklein/snapshot_data/newest/worldmap-index.csv', 'r') as csvfile:
         indexreader = csv.reader(csvfile)
         for country, index in indexreader:
             index_dict[country] = float(index)

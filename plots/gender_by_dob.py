@@ -14,7 +14,7 @@ def plot():
 
     for l in ['b', 'd']:
         acro = 'do'+l
-        df = pandas.DataFrame.from_csv('./data/%s-index.csv' % acro)
+        df = pandas.DataFrame.from_csv('/home/maximilianklein/snapshot_data/newest/%s-index.csv' % acro)
         del df['nan']
         df['total'] = df.sum(axis=1)
         df['nonbin'] = df['total'] - df['male'] - df['female']

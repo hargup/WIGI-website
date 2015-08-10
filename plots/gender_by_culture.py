@@ -1,41 +1,29 @@
 from __future__ import print_function
-import csv
+import pandas
+from bokeh.charts import Bar, output_notebook, show
 from bokeh.plotting import figure
 from bokeh.models import NumeralTickFormatter
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
-
-
-def load_data(data_file):
-    lang_data = dict()
-    with open(data_file, 'r') as csvfile:
-        indexreader = csv.reader(csvfile)
-        for code, gendered_total, fem_percent, name in indexreader:
-            lang_data[code] = {"gendered_total": gendered_total,
-                               "fem_percent": fem_percent,
-                               "name": name}
-    return lang_data
+from bokeh.models import LinearAxis, Range1d
 
 
 def plot():
-    lang_data = load_data('./data/gender-by-culture.csv')
+    df = pandas.DataFrame.from_csv('/home/maximilianklein/snapshot_data/newest/culture-index.csv')
+    no_gender_perc = df['nan'].sum() / df.sum().sum()
+    del df['nan']
+    df['total'] = df.sum(axis=1)
+    df['nonbin'] = df['total'] - df['male'] - df['female']
+    df['fem_per'] = df['female'] / (df['total'])
+    df['nonbin_per'] = df['nonbin'] / df['total']
+    df['fem_per_million'] = df['fem_per'] * 1000000
+    df['nonbin_per_million'] = df['nonbin_per'] * 1000000
 
-    p = figure(tools="pan,wheel_zoom,box_zoom,reset,previewsave",
-               x_axis_type="log", x_range=[0.1, 10**6], y_range=[0, 1],
-               title="Gender by Culture")
-
-    cult_x = [lang_data[code]['gendered_total'] for code in lang_data.keys()]
-    cult_y = [lang_data[code]['fem_percent'] for code in lang_data.keys()]
-    cult_name = [lang_data[code]['name'] for code in lang_data.keys()]
-    p.text(cult_x, cult_y, text=cult_name, text_color="#ff9944",
-           text_align="center")
-
-    p.scatter(cult_x, cult_y, color="#74bc3a", labels=cult_name)
-
-    p.xaxis.axis_label = "Total number of gendered biographies"
-
-    p.yaxis.axis_label = "Percentage of female biographies"
-    p.yaxis.formatter = NumeralTickFormatter(format="0.0%")
+    dfs = df.sort('total')
+    p = Bar(dfs[['total','fem_per_million','nonbin_per_million']], title="Gender By Inglehart-Welzel Culture",
+              xlabel = "Culture",
+              ylabel = "Total gendered biographies (Red), Female Percentage *1,000,00(Green)")
+    #bar.yaxis.formatter = NumeralTickFormatter(format="0.0%")
 
     js_filename = "gender_by_culture.js"
     output_path = "./files/assets/js/"
@@ -51,3 +39,4 @@ def plot():
 
 if __name__ == "__main__":
     print(plot())
+

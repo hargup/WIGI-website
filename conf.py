@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import time
-from plots import (gender_by_country, gender_by_dob, gender_by_culture,
-                   language_by_gender)
+from plots import gender_by_country
+from plots import gender_by_dob
+from plots import gender_by_culture
+from plots import gender_by_language
 
 # !! This is the configuration of Nikola. !! #
 # !!  You should edit it to your liking.  !! #
@@ -1010,10 +1012,10 @@ LOGGING_HANDLERS = {
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {
-        "gender_by_country_plot": gender_by_country.plot(),
+        #"gender_by_country_plot": gender_by_country.plot(),
         "gender_by_culture_plot": gender_by_culture.plot(),
         "gender_by_dob_plot": gender_by_dob.plot(),
-        "language_by_gender_plot": language_by_gender.plot()
+        "gender_by_language_plot": gender_by_language.plot()
     }
 
 # Add functions here and they will be called with template
