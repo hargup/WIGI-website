@@ -30,8 +30,15 @@ Run it locally
 To run the website locally, ensure that you have installed latest version of
 Nikola and Bokeh. We recommended to use [conda](http://conda.pydata.org/docs/),
 which is an open source python package and environment management tool. The
-installation instructions can be found on their respective websites. Once the
-dependencies are installed, run the following set of commands:
+installation instructions can be found on their respective websites. Alternatively,
+if you already have [pip](https://pip.pypa.io/en/stable/) installed, you can
+run the following command to install the dependencies.
+
+```
+pip install -r requirements.txt
+```
+
+Once the dependencies are installed, run the following set of commands:
 
 ```
 git clone https://github.com/hargup/WIGI-website
@@ -60,12 +67,12 @@ HTML pages from templates.
 
 1. All the posts are constructed from their specific templates, which file
    metadata and instructions on how to render the specific HTML page. For
-example, `gender by country.md` post has the following one line in the
-description:
+   example, `gender by country.md` post has the following one line in the
+   description:
 
-```
-.. template: gender_by_country.tmpl
-```
+   ```
+   .. template: gender_by_country.tmpl
+   ```
 
 This specifies the template to be used for creating the `gender_by_country.html`
 file. The templates are located in `templates/` directory.
@@ -73,31 +80,31 @@ file. The templates are located in `templates/` directory.
 2. Templates instruct how to build web page and where to embed Bokeh graph. For
    example, if you open `gender_by_country.tmpl` for example, you can find the
 following block
-```
-<%block name="plot">
-    ${gender_by_country_plot}
-</%block>
-```
+    ```
+    <%block name="plot">
+        ${gender_by_country_plot}
+    </%block>
+    ```
 which embeds the plot data (through `gender_by_country` plot) within the `plot`
 block of the HTML page and renders it further.
 
 3. The interesting part, as to how Nikola templates receive the plot data, can
-  be answered by inspecting `conf.py`. When `nikola build` is run, first
+   be answered by inspecting `conf.py`. When `nikola build` is run, first
 `conf.py` is executed. In this file, we import our Bokeh plot generating
 functions and generate respective plots' data. These data are then made
 available to all the Nikola templates by putting them into `GLOBAL_CONTEXT`.
 
-```
-GLOBAL_CONTEXT = {
-        "gender_by_country_plot": gender_by_country.plot(),
-        "gender_by_culture_plot": gender_by_culture.plot(),
-        "gender_by_dob_plot": gender_by_dob.plot(),
-        "language_by_gender_plot": language_by_gender.plot()
-    }
-```
+    ```
+    GLOBAL_CONTEXT = {
+            "gender_by_country_plot": gender_by_country.plot(),
+            "gender_by_culture_plot": gender_by_culture.plot(),
+            "gender_by_dob_plot": gender_by_dob.plot(),
+            "language_by_gender_plot": language_by_gender.plot()
+        }
+    ```
 
-These variables were referenced in the respective template files (as explained
-in point 2) to embed the plot data.
+    These variables were referenced in the respective template files (as explained
+    in point 2) to embed the plot data.
 
 All of this happens automatically by running `nikola build`.
 
