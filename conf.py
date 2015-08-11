@@ -132,7 +132,7 @@ NAVIGATION_LINKS = {
         ("/gender-by-culture.html", "Gender by Culture"),
         ("/gender-by-country.html", "Gender by Country"),
         ("/gender-by-date-of-birth.html", "Gender by Date of Birth"),
-        ("/gender-by-language.html", "Wikipedia Language by Gender"),
+        ("/gender-by-language.html", "Gender by Wikipedia Languag"),
     ),
 }
 

@@ -1,6 +1,6 @@
 <!--
-.. title: Wikipedia Language by Gender
-.. slug: wikipedia-language-by-gender
+.. title: Gender by Wikipedia Language
+.. slug: gender-by-language
 .. date: 2015-06-09 16:29:58 UTC+05:30
 .. tags:
 .. category:
