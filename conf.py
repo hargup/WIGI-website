@@ -132,7 +132,7 @@ NAVIGATION_LINKS = {
         ("/gender-by-culture.html", "Gender by Culture"),
         ("/gender-by-country.html", "Gender by Country"),
         ("/gender-by-date-of-birth.html", "Gender by Date of Birth"),
-        ("/wikipedia-language-by-gender.html", "Wikipedia Language by Gender"),
+        ("/gender-by-language.html", "Wikipedia Language by Gender"),
     ),
 }
 
@@ -1012,7 +1012,7 @@ LOGGING_HANDLERS = {
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {
-        #"gender_by_country_plot": gender_by_country.plot(),
+        "gender_by_country_plot": gender_by_country.plot(),
         "gender_by_culture_plot": gender_by_culture.plot(),
         "gender_by_dob_plot": gender_by_dob.plot(),
         "gender_by_language_plot": gender_by_language.plot()

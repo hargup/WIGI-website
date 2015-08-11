@@ -2,6 +2,7 @@ from __future__ import print_function
 from collections import OrderedDict
 import csv
 import numpy as np
+import pandas
 import world_countries as wc
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
@@ -10,21 +11,31 @@ from bokeh.embed import autoload_static
 
 
 def plot():
-    return None
     # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
-
+    
     country_xs = [world_countries[code]['lons'] for code in world_countries]
     country_ys = [world_countries[code]['lats'] for code in world_countries]
     country_names = [world_countries[code]['name'] for code in world_countries]
 
+    '''
     index_dict = dict()
     with open('/home/maximilianklein/snapshot_data/newest/worldmap-index.csv', 'r') as csvfile:
         indexreader = csv.reader(csvfile)
         for country, index in indexreader:
             index_dict[country] = float(index)
-
-    index_vals = np.array([index_dict[code] for code in world_countries])
+    '''
+    df = pandas.DataFrame.from_csv('/home/maximilianklein/snapshot_data/newest/worldmap-index.csv')
+    major = df[df['total'] > 100]
+    
+    
+    def lookup_wigi(code):
+        try:
+            return df.ix[code]['Score']
+        except KeyError:
+            return -1
+    
+    index_vals = np.array([lookup_wigi(code) for code in world_countries])
 
     colors = [
         "#%02x%02x%02x" % (r, g, b) for r, g, b in
@@ -66,3 +77,4 @@ def plot():
 
 if __name__ == "__main__":
     print(plot())
+

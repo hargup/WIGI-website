@@ -7,7 +7,7 @@
 .. link:
 .. description:
 .. type: text
-.. template: wikipedia_language_by_gender.tmpl
+.. template: gender_by_language.tmpl
 -->
 
 Wikipedia language by Gender Plot
