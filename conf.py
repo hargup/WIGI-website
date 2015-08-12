@@ -24,7 +24,7 @@ BLOG_AUTHOR = "WIGI Dev Team"  # (translatable)
 BLOG_TITLE = "WIGI"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "https://tools.wmflabs.org/wigi/"
+SITE_URL = "http://wigi.wmflabs.org/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://tools.wmflabs.org/wigi/"
@@ -132,7 +132,7 @@ NAVIGATION_LINKS = {
         ("/gender-by-culture.html", "Gender by Culture"),
         ("/gender-by-country.html", "Gender by Country"),
         ("/gender-by-date-of-birth.html", "Gender by Date of Birth"),
-        ("/gender-by-language.html", "Gender by Wikipedia Languag"),
+        ("/gender-by-language.html", "Gender by Wikipedia Language"),
     ),
 }
 
