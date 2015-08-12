@@ -6,10 +6,18 @@ from bokeh.models import NumeralTickFormatter
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 from bokeh.models import LinearAxis, Range1d
+import os
 
 
-def plot():
-    df = pandas.DataFrame.from_csv('/home/maximilianklein/snapshot_data/newest/culture-index.csv')
+def plot(newest_changes):
+    filelist = os.listdir('/home/maximilianklein/snapshot_data/{}/'.format(newest_changes))
+    culture_file = [f for f in filelist if f.startswith('culture')][0]
+    if newest_changes == 'newest-changes':
+        date_range = culture_file.split('culture-index-from-')[1].split('.csv')[0].replace('-',' ')
+        print(date_range)
+    csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,culture_file)
+
+    df = pandas.DataFrame.from_csv(csv_to_read)
     no_gender_perc = df['nan'].sum() / df.sum().sum()
     del df['nan']
     df['total'] = df.sum(axis=1)
@@ -18,14 +26,16 @@ def plot():
     df['nonbin_per'] = df['nonbin'] / df['total']
     df['fem_per_million'] = df['fem_per'] * 1000000
     df['nonbin_per_million'] = df['nonbin_per'] * 1000000
-
     dfs = df.sort('total')
-    p = Bar(dfs[['total','fem_per_million','nonbin_per_million']], title="Gender By Inglehart-Welzel Culture",
+
+    title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
+
+    p = Bar(dfs[['total','fem_per_million','nonbin_per_million']], title="Gender By Inglehart-Welzel Culture {}".format(title_suffix),
               xlabel = "Culture",
               ylabel = "Total gendered biographies (Red), Female Percentage *1,000,00(Green)")
     #bar.yaxis.formatter = NumeralTickFormatter(format="0.0%")
 
-    js_filename = "gender_by_culture.js"
+    js_filename = "gender_by_culture_{}.js".format(newest_changes)
     output_path = "./files/assets/js/"
     script_path = "./assets/js/"
 
@@ -38,5 +48,5 @@ def plot():
     return tag
 
 if __name__ == "__main__":
-    print(plot())
-
+    print(plot('newest'))
+    print(plot('newest-changes'))

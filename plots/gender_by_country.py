@@ -8,9 +8,19 @@ from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
+import os
 
 
-def plot():
+def plot(newest_changes):
+    filelist = os.listdir('/home/maximilianklein/snapshot_data/{}/'.format(newest_changes))
+    site_linkss_file = [f for f in filelist if f.startswith('worldmap')][0]
+    if newest_changes == 'newest-changes':
+        date_range = site_linkss_file.split('worldmap-index-from-')[1].split('.csv')[0].replace('-',' ')
+        print(date_range)
+    csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,site_linkss_file)
+    df = pandas.DataFrame.from_csv(csv_to_read)
+    major = df[df['total'] > 100]
+
     # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
     
@@ -18,15 +28,7 @@ def plot():
     country_ys = [world_countries[code]['lats'] for code in world_countries]
     country_names = [world_countries[code]['name'] for code in world_countries]
 
-    '''
-    index_dict = dict()
-    with open('/home/maximilianklein/snapshot_data/newest/worldmap-index.csv', 'r') as csvfile:
-        indexreader = csv.reader(csvfile)
-        for country, index in indexreader:
-            index_dict[country] = float(index)
-    '''
-    df = pandas.DataFrame.from_csv('/home/maximilianklein/snapshot_data/newest/worldmap-index.csv')
-    major = df[df['total'] > 100]
+
     
     
     def lookup_wigi(code):
@@ -37,12 +39,15 @@ def plot():
     
     index_vals = np.array([lookup_wigi(code) for code in world_countries])
 
+    def fmt(c):
+        return int(np.nan_to_num(c))
     colors = [
-        "#%02x%02x%02x" % (r, g, b) for r, g, b in
+        "#%02x%02x%02x" % (fmt(r), fmt(g), fmt(b)) for r, g, b in
         zip(np.floor(250*(1-index_vals)),
             np.floor(200*(1-index_vals)),
             np.floor(100*index_vals))]
-
+    print(colors)
+    
     source = ColumnDataSource(
             data=dict(
                     name=country_names,
@@ -52,7 +57,9 @@ def plot():
 
     # setup widgets
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
-    p = figure(title="world map", tools=TOOLS)
+    title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
+
+    p = figure(title="Gender by Country {}".format(title_suffix), tools=TOOLS)
 
     p.patches(country_xs, country_ys, fill_color=colors, source=source)
 
@@ -63,7 +70,7 @@ def plot():
         ("Country", "@name"),
     ])
 
-    js_filename = "gender_by_country.js"
+    js_filename = "gender_by_country_{}.js".format(newest_changes)
     script_path = "./assets/js/"
     output_path = "./files/assets/js/"
 
@@ -76,5 +83,5 @@ def plot():
     return tag
 
 if __name__ == "__main__":
-    print(plot())
-
+    print(plot('newest'))
+    print(plot('newest-changes'))

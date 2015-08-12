@@ -1012,10 +1012,14 @@ LOGGING_HANDLERS = {
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {
-        "gender_by_country_plot": gender_by_country.plot(),
-        "gender_by_culture_plot": gender_by_culture.plot(),
-        "gender_by_dob_plot": gender_by_dob.plot(),
-        "gender_by_language_plot": gender_by_language.plot()
+        "gender_by_country_plot": gender_by_country.plot('newest'),
+        "gender_by_country_plot_changes": gender_by_country.plot('newest-changes'),
+        "gender_by_culture_plot": gender_by_culture.plot('newest'),
+        "gender_by_culture_plot_changes": gender_by_culture.plot('newest-changes'),
+        "gender_by_dob_plot": gender_by_dob.plot('newest'),
+        "gender_by_dob_plot_changes": gender_by_dob.plot('newest-changes'),
+        "gender_by_language_plot": gender_by_language.plot('newest'),
+        "gender_by_language_plot_changes": gender_by_language.plot('newest-changes')
     }
 
 # Add functions here and they will be called with template
