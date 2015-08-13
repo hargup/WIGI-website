@@ -46,7 +46,6 @@ def plot(newest_changes):
         zip(np.floor(250*(1-index_vals)),
             np.floor(200*(1-index_vals)),
             np.floor(100*index_vals))]
-    print(colors)
     
     source = ColumnDataSource(
             data=dict(
