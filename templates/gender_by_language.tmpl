@@ -15,10 +15,14 @@
     ${post.text()}
     </div>
 <%block name="plot_changes">
-    ${gender_by_language_plot_changes}
+    ${gender_by_language_plot_changes['plot_tag']}
+
+    ${gender_by_language_plot_changes['table_html']}
 </%block>
 <%block name="plot">
-    ${gender_by_language_plot}
+    ${gender_by_language_plot['plot_tag']}
+
+    ${gender_by_language_plot['table_html']}
 </%block>
 </article>
 </%block>

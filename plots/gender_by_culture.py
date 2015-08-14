@@ -26,11 +26,16 @@ def plot(newest_changes):
     df['nonbin_per'] = df['nonbin'] / df['total']
     df['fem_per_million'] = df['fem_per'] * 1000000
     df['nonbin_per_million'] = df['nonbin_per'] * 1000000
-    dfs = df.sort('total')
+    dfs = df.sort('female')
+    
+    interesante = ['female','male','nonbin']
+    htmltable = dfs[interesante]
+    htmltable.columns=['Women','Men', 'Non-binary']
+    table_html = htmltable.to_html(na_rep='n/a')
 
     title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
 
-    p = Bar(dfs[['total','fem_per_million','nonbin_per_million']], title="Gender By Inglehart-Welzel Culture {}".format(title_suffix),
+    p = Bar(dfs[interesante], title="Gender By Inglehart-Welzel Culture {}".format(title_suffix),
               xlabel = "Culture",
               ylabel = "Total gendered biographies (Red), Female Percentage *1,000,00(Green)")
     #bar.yaxis.formatter = NumeralTickFormatter(format="0.0%")
@@ -45,7 +50,7 @@ def plot(newest_changes):
     with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
-    return tag
+    return {'plot_tag':tag, 'table_html':table_html}
 
 if __name__ == "__main__":
     print(plot('newest'))

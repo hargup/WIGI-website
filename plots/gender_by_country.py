@@ -21,6 +21,8 @@ def plot(newest_changes):
     df = pandas.DataFrame.from_csv(csv_to_read)
     major = df[df['total'] > 100]
 
+    table_html = major.sort('Score', ascending=False).to_html(max_rows=10)
+
     # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
     
@@ -79,7 +81,7 @@ def plot(newest_changes):
     with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
-    return tag
+    return {'plot_tag':tag, 'table_html':table_html}
 
 if __name__ == "__main__":
     print(plot('newest'))

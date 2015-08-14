@@ -24,7 +24,11 @@ def plot(newest_changes):
     df['nonbin'] = df['total'] - df['male'] - df['female']
     df['fem_per'] = df['female'] / (df['total'])
     df['nonbin_per'] = df['nonbin'] / df['total']
-    dfs = df.sort('total')
+    dfs = df.sort('total', ascending=False)
+
+    htmltable = dfs[['total','fem_per','nonbin_per']]
+    htmltable.columns=['Total','Women %', 'Non-binary %']
+    table_html = htmltable.to_html(na_rep='n/a', max_rows=20)
 
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
@@ -57,7 +61,7 @@ def plot(newest_changes):
     with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
-    return tag
+    return {'plot_tag':tag, 'table_html':table_html}
 
 
 if __name__ == "__main__":
