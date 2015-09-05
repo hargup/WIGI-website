@@ -22,3 +22,15 @@ footer {
     overflow: hidden;
     margin: 0 auto;
 }
+
+.data-tables {
+    text-align: center;
+}
+
+.data-tables table {
+    display: inline-table;
+}
+
+.data-tables th, td{
+    padding: 5px 10px;
+}

@@ -19,36 +19,39 @@ def plot(newest_changes):
         print(date_range)
     csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,site_linkss_file)
     df = pandas.DataFrame.from_csv(csv_to_read)
-    major = df[df['total'] > 100]
 
-    table_html = major.sort('Score', ascending=False).to_html(max_rows=10)
+    # drop 'NaN' rows
+    df.dropna(axis=0, how='any', inplace=True)
+
+    major = df[df['total'] > 100]
+    sorted_major = major.sort('Score', ascending=False)
+    top_rows = sorted_major.head(10).to_html()
+    bottom_rows = sorted_major.tail(10).to_html()
 
     # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
-    
+
     country_xs = [world_countries[code]['lons'] for code in world_countries]
     country_ys = [world_countries[code]['lats'] for code in world_countries]
     country_names = [world_countries[code]['name'] for code in world_countries]
 
-
-    
-    
     def lookup_wigi(code):
         try:
             return df.ix[code]['Score']
         except KeyError:
             return -1
-    
+
     index_vals = np.array([lookup_wigi(code) for code in world_countries])
 
     def fmt(c):
         return int(np.nan_to_num(c))
+
     colors = [
         "#%02x%02x%02x" % (fmt(r), fmt(g), fmt(b)) for r, g, b in
         zip(np.floor(250*(1-index_vals)),
             np.floor(200*(1-index_vals)),
             np.floor(100*index_vals))]
-    
+
     source = ColumnDataSource(
             data=dict(
                     name=country_names,
@@ -81,7 +84,7 @@ def plot(newest_changes):
     with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
-    return {'plot_tag':tag, 'table_html':table_html}
+    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows]}
 
 if __name__ == "__main__":
     print(plot('newest'))

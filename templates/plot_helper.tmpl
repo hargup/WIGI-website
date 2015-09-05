@@ -6,7 +6,22 @@
         class="bokeh-plot">
         <h2>Changes</h2>
         ${plots[plot_name]['newest_changes']['plot_tag']}
-        ${plots[plot_name]['newest_changes']['table_html']}
+    </div>
+    <div
+        class="data-tables">
+        <table>
+            <tr>
+                <th> Top 10 </th>
+                <th> Bottom 10 </th>
+            </tr>
+            <tr>
+                % for value in plots[plot_name]['newest']['table_html']:
+                <td>
+                    ${value}
+                </td>
+                % endfor
+            </tr>
+        </table>
     </div>
 </%def>
 
@@ -16,6 +31,21 @@
         class="bokeh-plot">
         <h2>All time</h2>
         ${plots[plot_name]['newest']['plot_tag']}
-        ${plots[plot_name]['newest']['table_html']}
+    </div>
+    <div
+        class="data-tables">
+        <table>
+            <tr>
+                <th> Top 10 </th>
+                <th> Bottom 10 </th>
+            </tr>
+            <tr>
+                % for value in plots[plot_name]['newest']['table_html']:
+                <td>
+                    ${value}
+                </td>
+                % endfor
+            </tr>
+        </table>
     </div>
 </%def>
