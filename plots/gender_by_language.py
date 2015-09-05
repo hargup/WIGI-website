@@ -20,6 +20,10 @@ def plot(newest_changes):
     no_gender_perc = df['nan'].sum() / df.sum().sum()
     print('no gender %', no_gender_perc)
     del df['nan']
+
+    # drop 'nan' and non wiki rows
+    df = df[map(lambda x: isinstance(x, str) and x.endswith('wiki'), df.index)]
+
     df['total'] = df.sum(axis=1)
     df['nonbin'] = df['total'] - df['male'] - df['female']
     df['fem_per'] = df['female'] / (df['total'])
@@ -48,7 +52,7 @@ def plot(newest_changes):
     hover.tooltips = OrderedDict([
         ("Language", "@lang_name"),
         ("Total gendered biographies", "@gendered_total"),
-        ("Percentage Female biographies", "@fem_percent")
+        ("Percentage female biographies", "@fem_percent")
     ])
 
     js_filename = "gender_by_language_{}.js".format(newest_changes)
