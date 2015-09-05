@@ -1,6 +1,8 @@
 ## -*- coding: utf-8 -*-
+
 <%inherit file="post.tmpl"/>
 <%namespace name="helper" file="post_helper.tmpl"/>
+<%namespace name="plot" file="plot_helper.tmpl"/>
 
 <%block name="extra_head">
     ${parent.extra_head()}
@@ -8,22 +10,12 @@
     ${helper.twitter_card_information(post)}
 </%block>
 
-
 <%block name="content">
 <article class="storypage" itemscope="itemscope" itemtype="http://schema.org/Article">
     <div itemprop="articleBody text">
     ${post.text()}
     </div>
-<%block name="plot_changes">
-    ${gender_by_country_plot_changes['plot_tag']}
-
-    ${gender_by_country_plot_changes['table_html']}
-</%block>
-
-<%block name="plot">
-    ${gender_by_country_plot['plot_tag']}
-
-    ${gender_by_country_plot['table_html']}
-</%block>
+    ${plot.alltime('gender_by_country')}
+    ${plot.changes('gender_by_country')}
 </article>
 </%block>

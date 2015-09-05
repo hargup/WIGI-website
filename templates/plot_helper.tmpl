@@ -1,0 +1,21 @@
+## -*- coding: utf-8 -*-
+
+<%def name="changes(plot_name, post=None)">
+    <div
+        id="bokeh-change-plot"
+        class="bokeh-plot">
+        <h2>Changes</h2>
+        ${plots[plot_name]['newest_changes']['plot_tag']}
+        ${plots[plot_name]['newest_changes']['table_html']}
+    </div>
+</%def>
+
+<%def name="alltime(plot_name, post=None)">
+    <div
+        id="bokeh-alltime-plot"
+        class="bokeh-plot">
+        <h2>All time</h2>
+        ${plots[plot_name]['newest']['plot_tag']}
+        ${plots[plot_name]['newest']['table_html']}
+    </div>
+</%def>
