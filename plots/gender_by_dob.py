@@ -34,12 +34,11 @@ def plot(newest_changes):
 
         #ra = pandas.rolling_mean(df['fem_per'], ra_len)
         #dox[acro] = ra
-        
 
     time_range = (1400, 2015)
 
     dox = dox[time_range[0]: time_range[1]]
-    
+
     '''dox['Date'] = [dateutil.parser.parse(str(int(x)))
                    for x in dox['dob'].keys()]''' 
 
@@ -52,7 +51,7 @@ def plot(newest_changes):
 
     title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
 
-    p = Line(dox, legend=True, title="Female Ratios {}".format(title_suffix))
+    p = Line(dox, legend=True, title="Date of Birth and Death by Gender - {}".format(title_suffix))
     #p.below[0].formatter.formats = dict(years=['%Y'])
 
     '''
@@ -78,6 +77,7 @@ def plot(newest_changes):
         js_file.write(js)
 
     return {'plot_tag':tag, 'table_html':table_html}
+
 if __name__ == "__main__":
     print(plot('newest'))
     print(plot('newest-changes'))
