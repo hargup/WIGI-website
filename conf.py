@@ -900,11 +900,11 @@ SHOW_SOURCELINK = True
 # Extra things you want in the pages HEAD tag. This will be added right
 # before </head>
 # (translatable)
-EXTRA_HEAD_DATA = " <script src='http://d3js.org/d3.v3.min.js'></script> <script src='http://d3js.org/topojson.v1.min.js'></script> <script src='assets/js/datamaps.world.min.js'></script>"
+#EXTRA_HEAD_DATA = ""
 # Google Analytics or whatever else you use. Added to the bottom of <body>
 # in the default template (base.tmpl).
 # (translatable)
-BODY_END = ""
+#BODY_END = ""
 
 # The possibility to extract metadata from the filename by using a
 # regular expression.
