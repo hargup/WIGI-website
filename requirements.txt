@@ -1,3 +1,4 @@
 bokeh
 nikola
+numpy
 pandas
