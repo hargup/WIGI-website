@@ -7,7 +7,7 @@ from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 import os
-import pandas
+import pandas as pd
 from numpy import max, min
 
 
@@ -17,13 +17,13 @@ def plot(newest_changes):
     if newest_changes == 'newest-changes':
         date_range = site_linkss_file.split('site_linkss-index-from-')[1].split('.csv')[0].replace('-',' ')
     csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,site_linkss_file)
-    df = pandas.DataFrame.from_csv(csv_to_read)
+    df = pd.DataFrame.from_csv(csv_to_read)
     no_gender_perc = df['nan'].sum() / df.sum().sum()
     print('no gender %', no_gender_perc)
 
-    # drop 'nan' and non wiki rows
+    # drop 'nan' and non wiki columns
     del df['nan']
-    df = df[map(lambda x: isinstance(x, str) and x.endswith('wiki'), df.index)]
+    df = df[list(map(lambda x: isinstance(x, str) and x.endswith('wiki'), df.index))]
 
     df['total'] = df.sum(axis=1)
     df['nonbin'] = df['total'] - df['male'] - df['female']
@@ -35,22 +35,31 @@ def plot(newest_changes):
     fsort_dfs = dfs.sort('fem_per', ascending=False)
     cutoff = fsort_dfs[['total','fem_per']].reset_index()
 
-    TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
+    TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
 
     title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
 
+    # adjust scale
     y_max = max(cutoff['total'])*1.1
+    y_min = min(cutoff['total']) - y_max*.05
     x_max = max(cutoff['fem_per'])*1.1
-    p = figure(x_axis_type="linear", x_range=[0, x_max], y_range=[1, y_max],
-               title="Language by Gender {}".format(title_suffix), tools=TOOLS)
+    x_min = min(cutoff['fem_per']) - x_max*.05
+
+    p = figure(x_axis_type="linear", x_range=[x_min, x_max], y_range=[y_min, y_max],
+               tools=TOOLS, plot_width=800, plot_height=500)
+
+    p.xaxis.axis_label='Percentage female biographies'
+    p.yaxis.axis_label='Total biographies'
 
     source = ColumnDataSource(data=cutoff.to_dict(orient='list'))
     p.circle('fem_per', 'total', size=12, line_color="black", fill_alpha=0.8, source=source)
 
-    p.text(cutoff["total"]+0.001, cutoff["fem_per"]+0.001,
-        text=cutoff.index,text_color="#333333",
-        text_align="center", text_font_size="10pt")
+    #p.text(cutoff["total"]+0.001, cutoff["fem_per"]+0.001,
+           #text=cutoff.index, text_color="#333333",
+           #text_align="center", text_font_size="10pt")
 
+
+    # setup tools
     hover = p.select(dict(type=HoverTool))
     hover.point_policy = "follow_mouse"
     hover.tooltips = OrderedDict([
@@ -70,9 +79,9 @@ def plot(newest_changes):
         js_file.write(js)
 
     # rename columns and generate top/bottom tables
-    cutoff.columns=['Wiki', 'Total','Female (percent)']
-    top_rows = cutoff.head(10).to_html(na_rep='n/a')
-    bottom_rows = cutoff[::-1].head(10).to_html(na_rep='n/a')
+    cutoff.columns=['Wiki', 'Total','Female (%)']
+    top_rows = cutoff.head(10).to_html(na_rep='n/a', classes=["table"])
+    bottom_rows = cutoff[::-1].head(10).to_html(na_rep='n/a', classes=["table"])
 
     return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows]}
 

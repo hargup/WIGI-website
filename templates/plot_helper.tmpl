@@ -1,27 +1,24 @@
 ## -*- coding: utf-8 -*-
 
-<%def name="changes(plot_name, post=None)">
+<%def name="changes(plot_name, post=None, title='Changes')">
     <div
         id="bokeh-change-plot"
         class="bokeh-plot">
-        <h2>Changes</h2>
+        <h2>${title}</h2>
         ${plots[plot_name]['newest_changes']['plot_tag']}
     </div>
     <div
-        class="data-tables">
-        <table>
-            <tr>
-                <th> Top 10 </th>
-                <th> Bottom 10 </th>
-            </tr>
-            <tr>
-                % for value in plots[plot_name]['newest']['table_html']:
-                <td>
-                    ${value}
-                </td>
-                % endfor
-            </tr>
-        </table>
+        class="row">
+        <div
+        class="col-md-6">
+            <h3> Top 10 </h3>
+            ${plots[plot_name]['newest_changes']['table_html'][0]}
+        </div>
+        <div
+        class="col-md-6">
+            <h3> Bottom 10 </h3>
+            ${plots[plot_name]['newest_changes']['table_html'][1]}
+        </div>
     </div>
 </%def>
 
@@ -33,19 +30,16 @@
         ${plots[plot_name]['newest']['plot_tag']}
     </div>
     <div
-        class="data-tables">
-        <table>
-            <tr>
-                <th> Top 10 </th>
-                <th> Bottom 10 </th>
-            </tr>
-            <tr>
-                % for value in plots[plot_name]['newest']['table_html']:
-                <td>
-                    ${value}
-                </td>
-                % endfor
-            </tr>
-        </table>
+        class="row">
+        <div
+        class="col-md-6">
+            <h3> Top 10 </h3>
+            ${plots[plot_name]['newest']['table_html'][0]}
+        </div>
+        <div
+        class="col-md-6">
+            <h3> Bottom 10 </h3>
+            ${plots[plot_name]['newest']['table_html'][1]}
+        </div>
     </div>
 </%def>
