@@ -1,8 +1,9 @@
 import dateutil
-import pandas
-from bokeh.charts import TimeSeries, Line
-from bokeh.plotting import gridplot
+import pandas as pd
+from bokeh.charts import Line
+from bokeh.plotting import gridplot, figure
 from bokeh.resources import CDN
+from bokeh.models import HoverTool, BoxSelectTool
 from bokeh.embed import autoload_static
 import os
 
@@ -10,7 +11,7 @@ import os
 def plot(newest_changes):
     ra_len = 1 #rolling average lenght
 
-    dox = pandas.DataFrame()
+    dox = pd.DataFrame()
     interesante = ['female','male','nonbin']
 
     for l in ['b', 'd']:
@@ -21,9 +22,11 @@ def plot(newest_changes):
         if newest_changes == 'newest-changes':
             date_range = dox_file.split('{}-index-from-'.format(acro))[1].split('.csv')[0].replace('-',' ')
         csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,dox_file)
-        df = pandas.DataFrame.from_csv(csv_to_read)
+        df = pd.DataFrame.from_csv(csv_to_read)
 
         del df['nan']
+        df = df[list(map(lambda x: not pd.isnull(x), df.index))]
+
         df['total'] = df.sum(axis=1)
         df['nonbin'] = df['total'] - df['male'] - df['female']
         df['fem_per'] = df['female'] / (df['total'])
@@ -32,39 +35,44 @@ def plot(newest_changes):
         for inte in interesante:
             dox['{}-{}'.format(acro, inte)] = df[inte]
 
-        #ra = pandas.rolling_mean(df['fem_per'], ra_len)
-        #dox[acro] = ra
-
-    time_range = (1400, 2015)
+    time_range = (1500, 2015)
 
     dox = dox[time_range[0]: time_range[1]]
 
-    '''dox['Date'] = [dateutil.parser.parse(str(int(x)))
-                   for x in dox['dob'].keys()]''' 
+    #tups = zip(['Date of Birth']*3 + ['Date of Death']*3, ['Women', 'Men', 'Non-binary']* 2)
+    #labs = ['-'.join(x) for x in tups]
 
-    tups = zip(['Date of Birth']*3 + ['Date of Death']*3, ['Women', 'Men', 'Non-binary']* 2)
-    labs = ['-'.join(x) for x in tups]
+    #dox.columns = labs
 
-    dox.columns = labs
-
-    table_html = dox.to_html(max_rows=20, na_rep="n/a")
 
     title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
 
-    p = Line(dox, legend=True, title="Date of Birth and Death by Gender - {}".format(title_suffix))
-    #p.below[0].formatter.formats = dict(years=['%Y'])
+    TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
+    p = figure(plot_height=500, plot_width=800, tools=TOOLS)
 
-    '''
-    nonbindox = nonbindox[time_range[0]: time_range[1]]
-    nonbindox['Date'] = [dateutil.parser.parse(str(int(x)))
-                         for x in nonbindox['dob'].keys()]
+    p.line(dox.index, dox['dob-female'], color="red", line_width=2, legend="DoB (Female)")
+    p.line(dox.index, dox['dod-female'], color= "blue", line_width=2, legend="DoD (Female)")
+    p.line(dox.index, dox['dob-male'], color="orange", line_width=2, legend="DoB (Male)")
+    p.line(dox.index, dox['dod-male'], color="brown", line_width=2, legend="DoD (Male)")
 
-    p2 = TimeSeries(nonbindox[['dob','dod','Date']], index='Date', legend=True,
-                    title="Non Binary Ratios ".format(title_suffix))
-    p2.below[0].formatter.formats = dict(years=['%Y'])
+    #p.multi_line(xs=[dox.index]*4,
+                 #ys=[dox['dob-female'], dox['dod-female'], dox['dob-male'], dox['dod-male']],
+                 #color=['red', 'blue', 'green', 'purple'],
+                 #alpha=[0.8, 0.3], line_width=4,
+                 #legend="adal")
 
-    p = gridplot([[p1], [p2]], toolbar_location=None)
-    '''
+    p.legend.orientation = 'top_left'
+    p.xaxis.axis_label = 'Year'
+    p.yaxis.axis_label = 'Number of biographies'
+
+    # setup tools
+    hover = p.select(dict(type=HoverTool))
+    hover.point_policy = "follow_mouse"
+    hover.tooltips = [
+        ("index", "$index"),
+        ("Year of event", "$x"),
+        ("Number of biographies", "$y"),
+    ]
 
     js_filename = "gender_by_dob_{}.js".format(newest_changes)
     script_path = "./assets/js/"
@@ -76,7 +84,12 @@ def plot(newest_changes):
     with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
-    return {'plot_tag':tag, 'table_html':table_html}
+    htmltable = dox[['dob-female', 'dod-female', 'dob-male', 'dod-male']]
+    htmltable.columns = ['DoB (Female)', 'DoD (Female)', 'DoB (Male)', 'DoD (Male)']
+    top_rows = htmltable.head(10).to_html(na_rep="n/a", classes=["table"])
+    bottom_rows = htmltable[::-1].head(10).to_html(na_rep="n/a", classes=["table"])
+
+    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows]}
 
 if __name__ == "__main__":
     print(plot('newest'))

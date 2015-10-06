@@ -2,8 +2,8 @@ from __future__ import print_function
 from collections import OrderedDict
 import csv
 import numpy as np
-import pandas
-import world_countries as wc
+import pandas as pd
+from . import world_countries as wc
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
 from bokeh.resources import CDN
@@ -18,15 +18,10 @@ def plot(newest_changes):
         date_range = site_linkss_file.split('worldmap-index-from-')[1].split('.csv')[0].replace('-',' ')
         print(date_range)
     csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,site_linkss_file)
-    df = pandas.DataFrame.from_csv(csv_to_read)
+    df = pd.DataFrame.from_csv(csv_to_read)
 
     # drop 'NaN' rows
-    df.dropna(axis=0, how='any', inplace=True)
-
-    major = df[df['total'] > 100]
-    sorted_major = major.sort('Score', ascending=False)
-    top_rows = sorted_major.head(10).to_html()
-    bottom_rows = sorted_major.tail(10).to_html()
+    df = df[list(map(lambda x: not pd.isnull(x), df.index))]
 
     # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
@@ -41,15 +36,17 @@ def plot(newest_changes):
         except KeyError:
             return -1
 
+    # TODO: adjust the scale for the changes plot
     index_vals = np.array([lookup_wigi(code) for code in world_countries])
 
     def fmt(c):
         return int(np.nan_to_num(c))
 
+    # TODO: Pick better colors
     colors = [
         "#%02x%02x%02x" % (fmt(r), fmt(g), fmt(b)) for r, g, b in
-        zip(np.floor(250*(1-index_vals)),
-            np.floor(200*(1-index_vals)),
+        zip(np.floor(50*(1-index_vals)),
+            np.floor(250*(1-index_vals)),
             np.floor(100*index_vals))]
 
     source = ColumnDataSource(
@@ -63,7 +60,8 @@ def plot(newest_changes):
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
     title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
 
-    p = figure(title="Gender by Country {}".format(title_suffix), tools=TOOLS)
+    p = figure(title="Gender by Country {}".format(title_suffix), tools=TOOLS,
+               plot_width=800, plot_height=500)
 
     p.patches(country_xs, country_ys, fill_color=colors, source=source)
 
@@ -83,6 +81,13 @@ def plot(newest_changes):
 
     with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
+
+    # FIX: generate top and bottom tables, currently uses older dataframe
+    major = df[df['total'] > 100]
+    sorted_major = major.sort('Score', ascending=False)
+    sorted_major.columns = ['Total', 'Score']
+    top_rows = sorted_major.head(10).to_html(classes=['table'])
+    bottom_rows = sorted_major[::-1].head(10).to_html(classes=['table'])
 
     return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows]}
 
