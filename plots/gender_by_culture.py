@@ -7,14 +7,15 @@ from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 from bokeh.models import LinearAxis, Range1d
 import os
+from config import data_dir
 
 
 def plot(newest_changes):
-    filelist = os.listdir('/home/maximilianklein/snapshot_data/{}/'.format(newest_changes))
+    filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     culture_file = [f for f in filelist if f.startswith('culture')][0]
     if newest_changes == 'newest-changes':
         date_range = culture_file.split('culture-index-from-')[1].split('.csv')[0].replace('-',' ')
-    csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,culture_file)
+    csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,culture_file)
 
     df = pd.DataFrame.from_csv(csv_to_read)
     no_gender_perc = df['nan'].sum() / df.sum().sum()
