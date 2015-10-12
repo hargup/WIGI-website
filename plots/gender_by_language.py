@@ -9,14 +9,15 @@ from bokeh.embed import autoload_static
 import os
 import pandas as pd
 from numpy import max, min
+from config import data_dir
 
 
 def plot(newest_changes):
-    filelist = os.listdir('/home/maximilianklein/snapshot_data/{}/'.format(newest_changes))
+    filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     site_linkss_file = [f for f in filelist if f.startswith('site_linkss')][0]
     if newest_changes == 'newest-changes':
         date_range = site_linkss_file.split('site_linkss-index-from-')[1].split('.csv')[0].replace('-',' ')
-    csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,site_linkss_file)
+    csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,site_linkss_file)
     df = pd.DataFrame.from_csv(csv_to_read)
     no_gender_perc = df['nan'].sum() / df.sum().sum()
     print('no gender %', no_gender_perc)

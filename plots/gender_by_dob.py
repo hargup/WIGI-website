@@ -6,6 +6,7 @@ from bokeh.resources import CDN
 from bokeh.models import HoverTool, BoxSelectTool
 from bokeh.embed import autoload_static
 import os
+from config import data_dir
 
 
 def plot(newest_changes):
@@ -16,12 +17,12 @@ def plot(newest_changes):
 
     for l in ['b', 'd']:
         acro = 'do'+l
-        filelist = os.listdir('/home/maximilianklein/snapshot_data/{}/'.format(newest_changes))
+        filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
         dox_list = [f for f in filelist if f.startswith(acro)]
         dox_file = dox_list[0]
         if newest_changes == 'newest-changes':
             date_range = dox_file.split('{}-index-from-'.format(acro))[1].split('.csv')[0].replace('-',' ')
-        csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,dox_file)
+        csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,dox_file)
         df = pd.DataFrame.from_csv(csv_to_read)
 
         del df['nan']

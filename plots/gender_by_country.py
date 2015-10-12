@@ -9,15 +9,16 @@ from bokeh.plotting import figure
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 import os
+from config import data_dir
 
 
 def plot(newest_changes):
-    filelist = os.listdir('/home/maximilianklein/snapshot_data/{}/'.format(newest_changes))
+    filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     site_linkss_file = [f for f in filelist if f.startswith('worldmap')][0]
     if newest_changes == 'newest-changes':
         date_range = site_linkss_file.split('worldmap-index-from-')[1].split('.csv')[0].replace('-',' ')
         print(date_range)
-    csv_to_read = '/home/maximilianklein/snapshot_data/{}/{}'.format(newest_changes,site_linkss_file)
+    csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,site_linkss_file)
     df = pd.DataFrame.from_csv(csv_to_read)
 
     # drop 'NaN' rows
