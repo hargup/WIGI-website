@@ -10,10 +10,10 @@ from config import data_dir
 
 
 def plot(newest_changes):
-    ra_len = 1 #rolling average lenght
+    ra_len = 1 #rolling average length
 
     dox = pd.DataFrame()
-    interesante = ['female','male','nonbin']
+    interesante = ['female','male','nonbin', 'fem_per', 'nonbin_per']
 
     for l in ['b', 'd']:
         acro = 'do'+l
@@ -40,11 +40,6 @@ def plot(newest_changes):
 
     dox = dox[time_range[0]: time_range[1]]
 
-    #tups = zip(['Date of Birth']*3 + ['Date of Death']*3, ['Women', 'Men', 'Non-binary']* 2)
-    #labs = ['-'.join(x) for x in tups]
-
-    #dox.columns = labs
-
 
     title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
 
@@ -56,11 +51,6 @@ def plot(newest_changes):
     p.line(dox.index, dox['dob-male'], color="orange", line_width=2, legend="DoB (Male)")
     p.line(dox.index, dox['dod-male'], color="brown", line_width=2, legend="DoD (Male)")
 
-    #p.multi_line(xs=[dox.index]*4,
-                 #ys=[dox['dob-female'], dox['dod-female'], dox['dob-male'], dox['dod-male']],
-                 #color=['red', 'blue', 'green', 'purple'],
-                 #alpha=[0.8, 0.3], line_width=4,
-                 #legend="adal")
 
     p.legend.orientation = 'top_left'
     p.xaxis.axis_label = 'Year'
@@ -85,8 +75,17 @@ def plot(newest_changes):
     with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
-    htmltable = dox[['dob-female', 'dod-female', 'dob-male', 'dod-male']]
-    htmltable.columns = ['DoB (Female)', 'DoD (Female)', 'DoB (Male)', 'DoD (Male)']
+    htmltable = dox[['dob-female', 'dod-female',
+                     'dob-male', 'dod-male',
+                     'dob-nonbin', 'dod-nonbin',
+                     'dob-fem_per', 'dod-fem_per',
+                     'dod-nonbin_per', 'dod-nonbin_per']].sort('dob-fem_per', ascending=False)
+
+    htmltable.columns = ['DoB (Female)', 'DoD (Female)',
+                         'DoB (Male)', 'DoD (Male)',
+                         'DoB (Non Binary)', 'DoD (Non Binary)',
+                         'DoB (Female Percentage)', 'DoD (Female Percentage)',
+                         'DoB (Non Binary Percentage)', 'DoD (Non Binary Percentage)']
     top_rows = htmltable.head(10).to_html(na_rep="n/a", classes=["table"])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep="n/a", classes=["table"])
 
