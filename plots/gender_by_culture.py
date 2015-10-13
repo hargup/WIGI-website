@@ -58,7 +58,7 @@ def plot(newest_changes):
         js_file.write(js)
 
     htmltable = dfs[interesante].sort('female', ascending=False)
-    htmltable.columns=['Women','Men', 'Others']
+    htmltable.columns=['Women','Men', 'Non Binary']
     top_rows = htmltable.head(10).to_html(na_rep='n/a', classes=['table'])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep='n/a', classes=['table'])
 
