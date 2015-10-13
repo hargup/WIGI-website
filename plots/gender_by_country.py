@@ -10,13 +10,15 @@ from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 import os
 from config import data_dir
-
+from .utils import get_date_range
 
 def plot(newest_changes):
     filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     site_linkss_file = [f for f in filelist if f.startswith('worldmap')][0]
+    date_range = ""
     if newest_changes == 'newest-changes':
-        date_range = site_linkss_file.split('worldmap-index-from-')[1].split('.csv')[0].replace('-',' ')
+        start, end = site_linkss_file.split('worldmap-index-from-')[1].split('.csv')[0].split('-to-')
+        date_range = get_date_range(start, end)
         print(date_range)
     csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,site_linkss_file)
     df = pd.DataFrame.from_csv(csv_to_read)
@@ -90,7 +92,7 @@ def plot(newest_changes):
     top_rows = sorted_major.head(10).to_html(classes=['table'])
     bottom_rows = sorted_major[::-1].head(10).to_html(classes=['table'])
 
-    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows]}
+    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows], 'date_range': date_range}
 
 if __name__ == "__main__":
     print(plot('newest'))

@@ -7,14 +7,17 @@ from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 from bokeh.models import LinearAxis, Range1d
 import os
-from config import data_dir
+from .utils import get_date_range
+from .config import data_dir
 
 
 def plot(newest_changes):
     filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     culture_file = [f for f in filelist if f.startswith('culture')][0]
+    date_range = None
     if newest_changes == 'newest-changes':
-        date_range = culture_file.split('culture-index-from-')[1].split('.csv')[0].replace('-',' ')
+        start, end = culture_file.split('culture-index-from-')[1].split('.csv')[0].split('-to-')
+        date_range = get_date_range(start, end)
     csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,culture_file)
 
     df = pd.DataFrame.from_csv(csv_to_read)
@@ -62,7 +65,8 @@ def plot(newest_changes):
     top_rows = htmltable.head(10).to_html(na_rep='n/a', classes=['table'])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep='n/a', classes=['table'])
 
-    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows]}
+    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows], 'date_range':
+            date_range}
 
 if __name__ == "__main__":
     print(plot('newest'))

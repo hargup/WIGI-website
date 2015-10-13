@@ -6,7 +6,8 @@ from bokeh.resources import CDN
 from bokeh.models import HoverTool, BoxSelectTool
 from bokeh.embed import autoload_static
 import os
-from config import data_dir
+from .config import data_dir
+from .utils import get_date_range
 
 
 def plot(newest_changes):
@@ -20,8 +21,10 @@ def plot(newest_changes):
         filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
         dox_list = [f for f in filelist if f.startswith(acro)]
         dox_file = dox_list[0]
+        date_range = None
         if newest_changes == 'newest-changes':
-            date_range = dox_file.split('{}-index-from-'.format(acro))[1].split('.csv')[0].replace('-',' ')
+            start, end = dox_file.split('{}-index-from-'.format(acro))[1].split('.csv')[0].split('-to-')
+            date_range = get_date_range(start, end)
         csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,dox_file)
         df = pd.DataFrame.from_csv(csv_to_read)
 
@@ -89,7 +92,7 @@ def plot(newest_changes):
     top_rows = htmltable.head(10).to_html(na_rep="n/a", classes=["table"])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep="n/a", classes=["table"])
 
-    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows]}
+    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows], 'date_range': date_range}
 
 if __name__ == "__main__":
     print(plot('newest'))
