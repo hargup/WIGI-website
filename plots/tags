@@ -1,0 +1,27 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+coords	world_countries.py	/^            coords = (c.split(',')[:2] for c in poly.text.split())$/;"	v	language:Python
+cultures	calc_graph_gbc.py	/^cultures = ['catholic europian',$/;"	v	language:Python
+data	calc_graph_gbc.py	/^data = load_data('.\/data\/gender-by-culture.csv')$/;"	v	language:Python
+data	world_countries.py	/^data = {}$/;"	v	language:Python
+data_dir	config.py	/^data_dir = "\/home\/hargup\/snapshot_data"$/;"	v	language:Python
+decoded	world_countries.py	/^    decoded = codecs.iterdecode(f, "utf-8")$/;"	v	language:Python
+fmt	gender_by_country.py	/^    def fmt(c):$/;"	f	language:Python	function:plot
+get_date_range	utils.py	/^def get_date_range(start, end):$/;"	f	language:Python
+lats	world_countries.py	/^        lats = []$/;"	v	language:Python
+load_data	calc_graph_gbc.py	/^def load_data(data_path):$/;"	f	language:Python
+lons	world_countries.py	/^        lons = []$/;"	v	language:Python
+lookup_wigi	gender_by_country.py	/^    def lookup_wigi(code):$/;"	f	language:Python	function:plot
+nan	world_countries.py	/^nan = float('NaN')$/;"	v	language:Python
+plot	calc_graph_gbc.py	/^plot = Bar(data, cat=cultures, title="gender by culture",$/;"	v	language:Python
+plot	gender_by_country.py	/^def plot(newest_changes):$/;"	f	language:Python
+plot	gender_by_culture.py	/^def plot(newest_changes):$/;"	f	language:Python
+plot	gender_by_dob.py	/^def plot(newest_changes):$/;"	f	language:Python
+plot	gender_by_language.py	/^def plot(newest_changes):$/;"	f	language:Python
+plot_wrapper	utils.py	/^def plot_wrapper(plot_func, newest_changes):$/;"	f	language:Python
+reader	world_countries.py	/^    reader = csv.reader(decoded, delimiter=',', quotechar='"')$/;"	v	language:Python
+xml	world_countries.py	/^        xml = et.fromstring(geometry)$/;"	v	language:Python

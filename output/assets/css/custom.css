@@ -1,0 +1,23 @@
+#blog-title {
+    padding: 18px 0 !important;
+    font-size: 36px;
+}
+
+.storypage {
+    width: 70%;
+    margin: 0 auto;
+    line-height: 1.5em;
+}
+
+footer {
+    text-align: center;
+    height: 80px;
+    margin: 20px 0;
+}
+
+#country-graph {
+    position: relative;
+    height: 550px;
+    overflow: hidden;
+    margin: 0 auto;
+}

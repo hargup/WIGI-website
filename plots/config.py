@@ -1,1 +1,1 @@
-data_dir = "/home/maximilianklein/snapshot_data"
+data_dir = "/home/hargup/snapshot_data"
