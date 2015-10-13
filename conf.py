@@ -133,6 +133,7 @@ NAVIGATION_LINKS = {
         ("/gender-by-country.html", "Gender by Country"),
         ("/gender-by-date-of-birth.html", "Gender by Date of Birth"),
         ("/gender-by-language.html", "Gender by Wikipedia Language"),
+        ("http://wigi.wmflabs.org/snapshot_data/", "Data Set")
     ),
 }
 
@@ -815,7 +816,7 @@ COMMENT_SYSTEM_ID = ""
 
 # Show link to source for the posts?
 # Formerly known as HIDE_SOURCELINK (inverse)
-SHOW_SOURCELINK = True
+SHOW_SOURCELINK = False
 # Copy the source files for your pages?
 # Setting it to False implies SHOW_SOURCELINK = False
 # COPY_SOURCES = True
