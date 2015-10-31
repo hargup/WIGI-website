@@ -59,12 +59,9 @@ def plot(newest_changes):
                 )
             )
 
-    # setup widgets
+    # setup widgets and figure
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
-    title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
-
-    p = figure(title="Gender by Country {}".format(title_suffix), tools=TOOLS,
-               plot_width=800, plot_height=500)
+    p = figure(plot_width=800, plot_height=500, tools=TOOLS)
 
     p.patches(country_xs, country_ys, fill_color=colors, source=source)
 
