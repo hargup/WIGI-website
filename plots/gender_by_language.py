@@ -35,8 +35,8 @@ def plot(newest_changes):
     df['nonbin_per'] = (df['nonbin'] / df['total'])*100
 
     # take only top 50 entries
-    dfs = df.sort('total', ascending=False).head(50)
-    fsort_dfs = dfs.sort('fem_per', ascending=False)
+    dfs = df.sort_values('total', ascending=False).head(50)
+    fsort_dfs = dfs.sort_values('fem_per', ascending=False)
     cutoff = fsort_dfs[['total','fem_per']].reset_index()
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
