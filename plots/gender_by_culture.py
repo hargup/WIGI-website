@@ -1,6 +1,6 @@
 from __future__ import print_function
 import pandas as pd
-from bokeh._legacy_charts import Bar
+from bokeh.charts import Bar
 from bokeh.plotting import figure
 from bokeh.models import PrintfTickFormatter
 from bokeh.resources import CDN
@@ -40,7 +40,7 @@ def plot(newest_changes):
     title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
 
     p = Bar(dfs[['female', 'male']],
-            stacked=True,
+            stack=True,
             xlabel="Culture",
             ylabel="Total gendered biographies",
             width=800,
