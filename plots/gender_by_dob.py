@@ -82,7 +82,7 @@ def plot(newest_changes):
                      'dob-male', 'dod-male',
                      'dob-nonbin', 'dod-nonbin',
                      'dob-fem_per', 'dod-fem_per',
-                     'dod-nonbin_per', 'dod-nonbin_per']].sort('dob-fem_per', ascending=False)
+                     'dod-nonbin_per', 'dod-nonbin_per']].sort_values('dob-fem_per', ascending=False)
 
     htmltable.columns = ['DoB (Female)', 'DoD (Female)',
                          'DoB (Male)', 'DoD (Male)',

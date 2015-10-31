@@ -87,7 +87,7 @@ def plot(newest_changes):
 
     # FIX: generate top and bottom tables, currently uses older dataframe
     major = df[df['total'] > 100]
-    sorted_major = major.sort('Score', ascending=False)
+    sorted_major = major.sort_values('Score', ascending=False)
     sorted_major.columns = ['Total', 'Score']
     top_rows = sorted_major.head(10).to_html(classes=['table'])
     bottom_rows = sorted_major[::-1].head(10).to_html(classes=['table'])

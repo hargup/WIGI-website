@@ -33,7 +33,7 @@ def plot(newest_changes):
     df['nonbin_per'] = df['nonbin'] / df['total']
     df['fem_per_million'] = df['fem_per'] * 1000000
     df['nonbin_per_million'] = df['nonbin_per'] * 1000000
-    dfs = df.sort('female')
+    dfs = df.sort_values('female')
 
     interesante = ['female','male','nonbin']
 
@@ -60,7 +60,7 @@ def plot(newest_changes):
     with open(output_path + js_filename, 'w') as js_file:
         js_file.write(js)
 
-    htmltable = dfs[interesante].sort('female', ascending=False)
+    htmltable = dfs[interesante].sort_values('female', ascending=False)
     htmltable.columns=['Women','Men', 'Non Binary']
     top_rows = htmltable.head(10).to_html(na_rep='n/a', classes=['table'])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep='n/a', classes=['table'])
