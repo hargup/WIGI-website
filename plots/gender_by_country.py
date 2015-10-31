@@ -9,7 +9,7 @@ from bokeh.plotting import figure
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 import os
-from config import data_dir
+from .config import data_dir
 from .utils import get_date_range
 
 def plot(newest_changes):
