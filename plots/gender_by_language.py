@@ -41,8 +41,6 @@ def plot(newest_changes):
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
 
-    title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
-
     # adjust scale
     y_max = max(cutoff['total'])*1.1
     y_min = min(cutoff['total']) - y_max*.05

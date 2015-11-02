@@ -37,8 +37,6 @@ def plot(newest_changes):
 
     interesante = ['female','male','nonbin']
 
-    title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
-
     p = Bar(dfs[['female', 'male']],
             stack=True,
             xlabel="Culture",

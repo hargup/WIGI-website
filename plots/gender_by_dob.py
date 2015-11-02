@@ -43,9 +43,6 @@ def plot(newest_changes):
 
     dox = dox[time_range[0]: time_range[1]]
 
-
-    title_suffix = 'Changes since {}'.format(date_range) if newest_changes == 'newest-changes' else 'All Time'
-
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
     p = figure(plot_height=500, plot_width=800, tools=TOOLS)
 
