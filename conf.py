@@ -654,7 +654,7 @@ LICENSE = """<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.
 
 # A small copyright notice for the page footer (in HTML).
 # (translatable)
-CONTENT_FOOTER = '{license}<br/> <a href=''>Research</a> - <a href=''>Team</a> - <a href=''>Contribute</a>'
+CONTENT_FOOTER = "{license}<br/> <a href='https://meta.wikimedia.org/wiki/Grants:IdeaLab/WIGI:_Wikipedia_Gender_Index'>Proposal</a> - <a href='https://github.com/notconfusing/WIGI'>Code</a> - <a href='https://groups.google.com/forum/#!forum/wigi-project'>Forum</a>"
 
 # Things that will be passed to CONTENT_FOOTER.format().  This is done
 # for translatability, as dicts are not formattable.  Nikola will
