@@ -20,7 +20,7 @@ def plot(newest_changes):
         start, end = site_linkss_file.split('worldmap-index-from-')[1].split('.csv')[0].split('-to-')
         date_range = get_date_range(start, end)
         print(date_range)
-    csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,site_linkss_file)
+    csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes, site_linkss_file)
     df = pd.DataFrame.from_csv(csv_to_read)
 
     # drop 'NaN' rows
@@ -84,12 +84,17 @@ def plot(newest_changes):
 
     # FIX: generate top and bottom tables, currently uses older dataframe
     major = df[df['total'] > 100]
+    labels = [i for i in major.index if i in world_countries.keys()]
+    major = major.loc[labels]
+    major.rename(dict((code, world_countries[code]['name']) for code in labels), inplace=True)
     sorted_major = major.sort_values('Score', ascending=False)
     sorted_major.columns = ['Total', 'Score']
     top_rows = sorted_major.head(10).to_html(classes=['table'])
     bottom_rows = sorted_major[::-1].head(10).to_html(classes=['table'])
 
-    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows], 'date_range': date_range}
+    return {'plot_tag': tag,
+            'table_html': [top_rows, bottom_rows],
+            'date_range': date_range}
 
 if __name__ == "__main__":
     print(plot('newest'))
