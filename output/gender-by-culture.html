@@ -16,13 +16,21 @@
 <meta property="og:site_name" content="WIGI">
 <meta property="og:title" content="Gender by Culture">
 <meta property="og:url" content="http://wigi.wmflabs.org/gender-by-culture.html">
-<meta property="og:description" content="Gender by Culture Plot">
+<meta property="og:description" content='Gender by culture
+This plot shows the number of gendered biographies of men and women in
+Wikidata, by "Culture".
+culture is determined by using translating ethnic group, place of birth, and
+citizenshi'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-06-08T16:21:11+05:30">
 <meta property="og:site_name" content="WIGI">
 <meta property="og:title" content="Gender by Culture">
 <meta property="og:url" content="http://wigi.wmflabs.org/gender-by-culture.html">
-<meta property="og:description" content="Gender by Culture Plot">
+<meta property="og:description" content='Gender by culture
+This plot shows the number of gendered biographies of men and women in
+Wikidata, by "Culture".
+culture is determined by using translating ethnic group, place of birth, and
+citizenshi'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-06-08T16:21:11+05:30">
 </head>
@@ -78,15 +86,27 @@
             
             
 <article class="storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><div itemprop="articleBody text">
-    <p>Gender by Culture Plot</p>
+    <div>
+<h3>Gender by culture</h3>
+<p>This plot shows the number of gendered biographies of men and women in
+Wikidata, by "Culture".</p>
+<p><strong>culture</strong> is determined by using translating ethnic group, place of birth, and
+citizenship into 1 of 9 world cultures as per <a href="https://en.wikipedia.org/wiki/Inglehart%E2%80%93Welzel_cultural_map_of_the_world">Inglehart-Welzel map of the
+world</a>
+with Mechanical Turk. Then we take the consensus of the three aggregated
+variables. All aggregation maps are available for inspection <a href="https://github.com/notconfusing/WIGI/tree/master/helpers/aggregation_maps">on
+github</a>.</p>
+<p>As of October 2014, only about 45% of biographies, had culture, so this data is
+incomplete.</p>
+</div>
     </div>
     
     <div id="bokeh-alltime-plot" class="bokeh-plot">
         <h2>All time</h2>
-        <script src="assets/js/gender_by_culture_newest.js" id="367b8b93-bafc-4c5a-a00d-937226421836" async="true" data-bokeh-data="static" data-bokeh-modelid="15ac5e43-e68e-4c88-8e71-f5cdd0da60ca" data-bokeh-modeltype="Plot" data-bokeh-loglevel="info"></script>
+        <script src="assets/js/gender_by_culture_newest.js" id="d3cb47d0-9f07-4c71-8e0b-f1f96dd84efa" async="true" data-bokeh-data="static" data-bokeh-modelid="1277c690-d86f-47f5-831c-3044e3e462ac" data-bokeh-modeltype="Plot" data-bokeh-loglevel="info"></script>
 </div>
-    <div class="container">
-        <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12">
             <h3> Top 10 </h3>
             <table border="1" class="dataframe table">
 <thead><tr style="text-align: right;">
@@ -154,8 +174,8 @@
 </table>
 </div>
     </div>
-    <div class="container">
-        <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12">
             <h3> Bottom 10 </h3>
             <table border="1" class="dataframe table">
 <thead><tr style="text-align: right;">
@@ -227,10 +247,10 @@
     
     <div id="bokeh-change-plot" class="bokeh-plot">
         <h2>Changes 20 Sep '15 - 27 Sep '15</h2>
-        <script src="assets/js/gender_by_culture_newest-changes.js" id="feb91b7b-b7dd-422b-be5d-c610ea674a72" async="true" data-bokeh-data="static" data-bokeh-modelid="06542250-278f-4dd1-a85b-f20965ac142d" data-bokeh-modeltype="Plot" data-bokeh-loglevel="info"></script>
+        <script src="assets/js/gender_by_culture_newest-changes.js" id="2db58e8c-1cab-4752-bc8a-8897189ff584" async="true" data-bokeh-data="static" data-bokeh-modelid="498f1f2c-db4d-4627-8071-052ce2d29605" data-bokeh-modeltype="Plot" data-bokeh-loglevel="info"></script>
 </div>
-    <div class="container">
-        <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12">
             <h3> Top 10 </h3>
             <table border="1" class="dataframe table">
 <thead><tr style="text-align: right;">
@@ -298,8 +318,8 @@
 </table>
 </div>
     </div>
-    <div class="container">
-        <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12">
             <h3> Bottom 10 </h3>
             <table border="1" class="dataframe table">
 <thead><tr style="text-align: right;">
@@ -372,7 +392,7 @@
 </div>
         <!--End of body content-->
 
-        <footer><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a><br>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.<br><a href="#">Research</a> - <a href="#">Team</a> - <a href="#">Contribute</a>
+        <footer><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a><br>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.<br><a href="https://meta.wikimedia.org/wiki/Grants:IdeaLab/WIGI:_Wikipedia_Gender_Index">Proposal</a> - <a href="https://github.com/notconfusing/WIGI">Code</a> - <a href="https://groups.google.com/forum/#!forum/wigi-project">Forum</a>
             
         </footer>
 </div>

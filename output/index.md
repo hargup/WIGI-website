@@ -10,9 +10,20 @@
 .. template: mainpage.tmpl
 -->
 
-GENDER GAP THROUGH TIME AND SPACE : A JOURNEY THROUGH WIKIPEDIA BIOGRAPHIES
-===========================================================================
+<strong>Wi</strong>kipedia <strong>G</strong>ender Indicators (<strong>WIGI</strong>)
+-------------------------------------------------------------------------------------
 
 It is an unfortunate but unavoidable fact that encyclopedias always have had a gender bias. One of the dimensions of this bias is the contributors’ gender distribution (Thomas 1992; Reagle and Rhue 2011). Just as there were very few women authors among contributors to traditional, printed encyclopedias, recent surveys indicate that women constitute only around 13%-16% of Wikipedia contributors, or Wikipedians (Glott, Schmidt, & Ghosh 2010; Hill and Shaw 2013). 
 
-A detailed analysis of Wikipedia editor gender dynamics has been offered by Lam et al. (2011), and the gender disparity of Wikipedia editors has been the subject of mainstream press coverage, itself a subject analyzed in detail by Eckert and Merill (2013). Thanks to a number of studies in the past decade we have arrived closer to understanding why those biases persist in Wikipedia, despite the project’s “anyone can edit” nature. This has been attributed to the persisting gender imbalance in computer-related fields, reaching an apex in the Free, Libre and Open Source Software community, where women make up only 1% of participants (Ghosh et al.2002), and with which Wikipedia’s community is closely associated (AUTHOR BLINDED 2009). 
+WIGI is a project producing a **open data set** about the
+*gender, date of birth, place of birth, ethnicity, occupation*, and *language*
+of **biography articles** in all Wikipedias. Our [data
+set](http://wigi.wmflabs.org/snapshot_data/) comes from
+[Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), the database the
+feeds Wikipedia, and is updated weekly. This site shows a few demonstrations of
+what can be done with that information.
+
+This project started as a [personal research
+interest](http://arxiv.org/abs/1502.03086), and is now [funded by a Wikimedia
+Foundation
+Grant](https://meta.wikimedia.org/wiki/Grants:IEG/WIGI:_Wikipedia_Gender_Index).
