@@ -13,6 +13,11 @@ from .config import data_dir
 from .utils import get_date_range
 
 
+# The csv for language codes and their English is taken from
+# http://wikistats.wmflabs.org/
+wikis = pd.DataFrame.from_csv('./plots/wikipedias.csv')
+langdict = dict([(code.replace('-','_')+'wiki', name) for code, name in zip(wikis.lang, wikis.id)])
+
 def plot(newest_changes):
     filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     site_linkss_file = [f for f in filelist if f.startswith('site_linkss')][0]
@@ -22,12 +27,15 @@ def plot(newest_changes):
         date_range = get_date_range(start, end)
     csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,site_linkss_file)
     df = pd.DataFrame.from_csv(csv_to_read)
+
+    # Taking only wikipedias ignoring wikiquote, wikinews and wikisource
+    df = df.loc[list(langdict.keys())]
+    df.rename(langdict, inplace=True)
+
     no_gender_perc = df['nan'].sum() / df.sum().sum()
     print('no gender %', no_gender_perc)
 
-    # drop 'nan' and non wiki columns
     del df['nan']
-    df = df[list(map(lambda x: isinstance(x, str) and x.endswith('wiki'), df.index))]
 
     df['total'] = df.sum(axis=1)
     df['nonbin'] = df['total'] - df['male'] - df['female']
@@ -50,15 +58,11 @@ def plot(newest_changes):
     p = figure(x_axis_type="linear", x_range=[x_min, x_max], y_range=[y_min, y_max],
                tools=TOOLS, plot_width=800, plot_height=500)
 
-    p.xaxis.axis_label='Percentage female biographies'
-    p.yaxis.axis_label='Total biographies'
+    p.xaxis.axis_label = 'Percentage female biographies'
+    p.yaxis.axis_label = 'Total biographies'
 
     source = ColumnDataSource(data=cutoff.to_dict(orient='list'))
     p.circle('fem_per', 'total', size=12, line_color="black", fill_alpha=0.8, source=source)
-
-    #p.text(cutoff["total"]+0.001, cutoff["fem_per"]+0.001,
-           #text=cutoff.index, text_color="#333333",
-           #text_align="center", text_font_size="10pt")
 
 
     # setup tools
