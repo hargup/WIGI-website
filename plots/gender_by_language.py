@@ -55,8 +55,9 @@ def plot(newest_changes):
     x_max = max(cutoff['fem_per'])*1.1
     x_min = min(cutoff['fem_per']) - x_max*.05
 
-    p = figure(x_axis_type="linear", x_range=[x_min, x_max], y_range=[y_min, y_max],
-               tools=TOOLS, plot_width=800, plot_height=500)
+    p = figure(x_axis_type="linear", y_axis_type="log",
+               x_range=[x_min, x_max], y_range=[y_min, y_max], tools=TOOLS,
+               plot_width=800, plot_height=500)
 
     p.xaxis.axis_label = 'Percentage female biographies'
     p.yaxis.axis_label = 'Total biographies'
