@@ -48,9 +48,9 @@ def plot(newest_changes):
     # TODO: Pick better colors
     colors = [
         "#%02x%02x%02x" % (fmt(r), fmt(g), fmt(b)) for r, g, b in
-        zip(np.floor(50*(1-index_vals)),
-            np.floor(250*(1-index_vals)),
-            np.floor(100*index_vals))]
+        zip(np.floor(87 - 80*2*(-0.5 + 1/(1 + np.exp(-3*index_vals)))),
+            np.floor(150 - 150*2*(-0.5 + 1/(1 + np.exp(-3*index_vals)))),
+            np.floor(118 - 100*2*(-0.5 + 1/(1 + np.exp(-3*index_vals)))))]
 
     source = ColumnDataSource(
             data=dict(
