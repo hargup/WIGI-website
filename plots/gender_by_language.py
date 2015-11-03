@@ -50,8 +50,8 @@ def plot(newest_changes):
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
 
     # adjust scale
-    y_max = max(cutoff['total'])*1.1
-    y_min = min(cutoff['total']) - y_max*.05
+    y_max = max(cutoff['total'])*1.2
+    y_min = min(cutoff['total'])*0.8
     x_max = max(cutoff['fem_per'])*1.1
     x_min = min(cutoff['fem_per']) - x_max*.05
 
