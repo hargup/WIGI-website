@@ -1,6 +1,6 @@
 from __future__ import print_function
 import pandas as pd
-from bokeh.charts import Bar
+from bokeh._legacy_charts import Bar
 from bokeh.plotting import figure
 from bokeh.models import PrintfTickFormatter
 from bokeh.resources import CDN
@@ -38,7 +38,7 @@ def plot(newest_changes):
     interesante = ['female','male','nonbin']
 
     p = Bar(dfs[['female', 'male']],
-            stack=True,
+            stacked=True,
             xlabel="Culture",
             ylabel="Total gendered biographies",
             width=800,
