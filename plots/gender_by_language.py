@@ -50,13 +50,14 @@ def plot(newest_changes):
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
 
     # adjust scale
-    y_max = max(cutoff['total'])*1.1
-    y_min = min(cutoff['total']) - y_max*.05
+    y_max = max(cutoff['total'])*1.2
+    y_min = min(cutoff['total'])*0.8
     x_max = max(cutoff['fem_per'])*1.1
     x_min = min(cutoff['fem_per']) - x_max*.05
 
-    p = figure(x_axis_type="linear", x_range=[x_min, x_max], y_range=[y_min, y_max],
-               tools=TOOLS, plot_width=800, plot_height=500)
+    p = figure(x_axis_type="linear", y_axis_type="log",
+               x_range=[x_min, x_max], y_range=[y_min, y_max], tools=TOOLS,
+               plot_width=800, plot_height=500)
 
     p.xaxis.axis_label = 'Percentage female biographies'
     p.yaxis.axis_label = 'Total biographies'
