@@ -7,10 +7,11 @@ from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 from bokeh.models import LinearAxis, Range1d
 import os
-from .utils import get_date_range
+from .utils import get_date_range, write_plot
 from .config import data_dir
 
 
+@write_plot
 def plot(newest_changes):
     filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     culture_file = [f for f in filelist if f.startswith('culture')][0]
@@ -47,24 +48,13 @@ def plot(newest_changes):
 
     #bar.yaxis.formatter = NumeralTickFormatter(format="0.0%")
     p._yaxis.formatter = PrintfTickFormatter(format="%5.1e")
-
-    js_filename = "gender_by_culture_{}.js".format(newest_changes)
-    output_path = "./files/assets/js/"
-    script_path = "./assets/js/"
-
-    # generate javascript plot and corresponding script tag
-    js, tag = autoload_static(p, CDN, script_path + js_filename)
-
-    with open(output_path + js_filename, 'w') as js_file:
-        js_file.write(js)
-
     htmltable = dfs[interesante].sort_values('female', ascending=False)
     htmltable.columns=['Women','Men', 'Non Binary']
     top_rows = htmltable.head(10).to_html(na_rep='n/a', classes=['table'])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep='n/a', classes=['table'])
+    table_html = [top_rows, bottom_rows]
 
-    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows], 'date_range':
-            date_range}
+    return p, date_range, table_html
 
 if __name__ == "__main__":
     print(plot('newest'))

@@ -10,8 +10,10 @@ from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 import os
 from .config import data_dir
-from .utils import get_date_range
+from .utils import get_date_range, write_plot
 
+
+@write_plot
 def plot(newest_changes):
     filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     site_linkss_file = [f for f in filelist if f.startswith('worldmap')][0]
@@ -72,16 +74,6 @@ def plot(newest_changes):
         ("Country", "@name"),
     ])
 
-    js_filename = "gender_by_country_{}.js".format(newest_changes)
-    script_path = "./assets/js/"
-    output_path = "./files/assets/js/"
-
-    # generate javascript plot and corresponding script tag
-    js, tag = autoload_static(p, CDN, script_path + js_filename)
-
-    with open(output_path + js_filename, 'w') as js_file:
-        js_file.write(js)
-
     # FIX: generate top and bottom tables, currently uses older dataframe
     major = df[df['total'] > 100]
     labels = [i for i in major.index if i in world_countries.keys()]
@@ -92,9 +84,9 @@ def plot(newest_changes):
     top_rows = sorted_major.head(10).to_html(classes=['table'])
     bottom_rows = sorted_major[::-1].head(10).to_html(classes=['table'])
 
-    return {'plot_tag': tag,
-            'table_html': [top_rows, bottom_rows],
-            'date_range': date_range}
+    table_html = [top_rows, bottom_rows]
+
+    return p, date_range, table_html
 
 if __name__ == "__main__":
     print(plot('newest'))

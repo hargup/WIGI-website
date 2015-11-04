@@ -10,7 +10,7 @@ import os
 import pandas as pd
 from numpy import max, min
 from .config import data_dir
-from .utils import get_date_range
+from .utils import get_date_range, write_plot
 
 
 # The csv for language codes and their English is taken from
@@ -18,6 +18,8 @@ from .utils import get_date_range
 wikis = pd.DataFrame.from_csv('./plots/wikipedias.csv')
 langdict = dict([(code.replace('-','_')+'wiki', name) for code, name in zip(wikis.lang, wikis.id)])
 
+
+@write_plot
 def plot(newest_changes):
     filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
     site_linkss_file = [f for f in filelist if f.startswith('site_linkss')][0]
@@ -75,23 +77,14 @@ def plot(newest_changes):
         ("Percentage female biographies", "@fem_per")
     ])
 
-    js_filename = "gender_by_language_{}.js".format(newest_changes)
-    output_path = "./files/assets/js/"
-    script_path = "./assets/js/"
-
-    # generate javascript plot and corresponding script tag
-    js, tag = autoload_static(p, CDN, script_path + js_filename)
-
-    with open(output_path + js_filename, 'w') as js_file:
-        js_file.write(js)
-
     # rename columns and generate top/bottom tables
     cutoff.columns=['Wiki', 'Total','Female (%)']
     top_rows = cutoff.head(10).to_html(na_rep='n/a', classes=["table"])
     bottom_rows = cutoff[::-1].head(10).to_html(na_rep='n/a', classes=["table"])
 
-    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows], 'date_range':
-            date_range}
+    table_html = [top_rows, bottom_rows]
+
+    return p, date_range, table_html
 
 
 if __name__ == "__main__":

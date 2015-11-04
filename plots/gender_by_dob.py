@@ -7,9 +7,10 @@ from bokeh.models import HoverTool, BoxSelectTool
 from bokeh.embed import autoload_static
 import os
 from .config import data_dir
-from .utils import get_date_range
+from .utils import get_date_range, write_plot
 
 
+@write_plot
 def plot(newest_changes):
     ra_len = 1 #rolling average length
 
@@ -65,16 +66,6 @@ def plot(newest_changes):
         ("Number of biographies", "$y"),
     ]
 
-    js_filename = "gender_by_dob_{}.js".format(newest_changes)
-    script_path = "./assets/js/"
-    output_path = "./files/assets/js/"
-
-    # generate javascript plot and corresponding script tag
-    js, tag = autoload_static(p, CDN, script_path + js_filename)
-
-    with open(output_path + js_filename, 'w') as js_file:
-        js_file.write(js)
-
     htmltable = dox[['dob-female', 'dod-female',
                      'dob-male', 'dod-male',
                      'dob-nonbin', 'dod-nonbin',
@@ -88,8 +79,9 @@ def plot(newest_changes):
                          'DoB (Non Binary Percentage)', 'DoD (Non Binary Percentage)']
     top_rows = htmltable.head(10).to_html(na_rep="n/a", classes=["table"])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep="n/a", classes=["table"])
+    table_html = [top_rows, bottom_rows]
 
-    return {'plot_tag':tag, 'table_html':[top_rows, bottom_rows], 'date_range': date_range}
+    return p, date_range, table_html
 
 if __name__ == "__main__":
     print(plot('newest'))
