@@ -1,13 +1,10 @@
 from __future__ import print_function
 from collections import OrderedDict
-import csv
 import numpy as np
 import pandas as pd
 from . import world_countries as wc
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
-from bokeh.resources import CDN
-from bokeh.embed import autoload_static
 import os
 from .config import data_dir
 from .utils import get_date_range, write_plot
@@ -78,7 +75,8 @@ def plot(newest_changes):
     major = df[df['total'] > 100]
     labels = [i for i in major.index if i in world_countries.keys()]
     major = major.loc[labels]
-    major.rename(dict((code, world_countries[code]['name']) for code in labels), inplace=True)
+    major.rename(dict((code, world_countries[code]['name'])
+                      for code in labels), inplace=True)
     sorted_major = major.sort_values('Score', ascending=False)
     sorted_major.columns = ['Total', 'Score']
     top_rows = sorted_major.head(10).to_html(classes=['table'])

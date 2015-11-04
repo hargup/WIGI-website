@@ -1,10 +1,6 @@
-import dateutil
 import pandas as pd
-from bokeh.charts import Line
-from bokeh.plotting import gridplot, figure
-from bokeh.resources import CDN
-from bokeh.models import HoverTool, BoxSelectTool
-from bokeh.embed import autoload_static
+from bokeh.plotting import figure
+from bokeh.models import HoverTool
 import os
 from .config import data_dir
 from .utils import get_date_range, write_plot
@@ -12,10 +8,8 @@ from .utils import get_date_range, write_plot
 
 @write_plot
 def plot(newest_changes):
-    ra_len = 1 #rolling average length
-
     dox = pd.DataFrame()
-    interesante = ['female','male','nonbin', 'fem_per', 'nonbin_per']
+    interesante = ['female', 'male', 'nonbin', 'fem_per', 'nonbin_per']
 
     for l in ['b', 'd']:
         acro = 'do'+l
@@ -47,11 +41,14 @@ def plot(newest_changes):
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
     p = figure(plot_height=500, plot_width=800, tools=TOOLS)
 
-    p.line(dox.index, dox['dob-female'], color="red", line_width=2, legend="DoB (Female)")
-    p.line(dox.index, dox['dod-female'], color= "blue", line_width=2, legend="DoD (Female)")
-    p.line(dox.index, dox['dob-male'], color="orange", line_width=2, legend="DoB (Male)")
-    p.line(dox.index, dox['dod-male'], color="brown", line_width=2, legend="DoD (Male)")
-
+    p.line(dox.index, dox['dob-female'], color="red",
+           line_width=2, legend="DoB (Female)")
+    p.line(dox.index, dox['dod-female'], color="blue",
+           line_width=2, legend="DoD (Female)")
+    p.line(dox.index, dox['dob-male'], color="orange",
+           line_width=2, legend="DoB (Male)")
+    p.line(dox.index, dox['dod-male'], color="brown",
+           line_width=2, legend="DoD (Male)")
 
     p.legend.orientation = 'top_left'
     p.xaxis.axis_label = 'Year'

@@ -1,8 +1,6 @@
 from __future__ import print_function
 from collections import OrderedDict
-from bokeh.plotting import figure, output_file
-from bokeh.charts import Scatter, output_notebook, show
-from bokeh.models import NumeralTickFormatter
+from bokeh.plotting import figure
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
@@ -16,7 +14,7 @@ from .utils import get_date_range, write_plot
 # The csv for language codes and their English is taken from
 # http://wikistats.wmflabs.org/
 wikis = pd.DataFrame.from_csv('./plots/wikipedias.csv')
-langdict = dict([(code.replace('-','_')+'wiki', name) for code, name in zip(wikis.lang, wikis.id)])
+langdict = dict([(code.replace('-', '_')+'wiki', name) for code, name in zip(wikis.lang, wikis.id)])
 
 
 @write_plot
