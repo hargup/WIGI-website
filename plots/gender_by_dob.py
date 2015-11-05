@@ -4,7 +4,7 @@ from bokeh.models import HoverTool
 from .utils import write_plot, read_data
 
 
-@write_plot
+@write_plot('dob')
 def plot(newest_changes):
     dox = pd.DataFrame()
     interesante = ['female', 'male', 'nonbin', 'fem_per', 'nonbin_per']

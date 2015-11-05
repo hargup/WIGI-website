@@ -8,7 +8,7 @@ from bokeh.plotting import figure
 from .utils import write_plot, read_data
 
 
-@write_plot
+@write_plot('country')
 def plot(newest_changes):
     df, date_range = read_data(newest_changes, 'worldmap')
 

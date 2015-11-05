@@ -13,7 +13,7 @@ wikis = pd.DataFrame.from_csv('./plots/wikipedias.csv')
 langdict = dict([(code.replace('-', '_')+'wiki', name) for code, name in zip(wikis.lang, wikis.id)])
 
 
-@write_plot
+@write_plot('language')
 def plot(newest_changes):
     df, date_range = read_data(newest_changes, 'site_linkss')
 

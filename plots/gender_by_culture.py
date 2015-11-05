@@ -5,7 +5,7 @@ from bokeh.models import PrintfTickFormatter
 from .utils import write_plot, read_data
 
 
-@write_plot
+@write_plot('culture')
 def plot(newest_changes):
     df, date_range = read_data(newest_changes, 'culture')
 
