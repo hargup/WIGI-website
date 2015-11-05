@@ -2,22 +2,12 @@ from __future__ import print_function
 import pandas as pd
 from bokeh._legacy_charts import Bar
 from bokeh.models import PrintfTickFormatter
-import os
-from .utils import get_date_range, write_plot
-from .config import data_dir
+from .utils import write_plot, read_data
 
 
 @write_plot
 def plot(newest_changes):
-    filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
-    culture_file = [f for f in filelist if f.startswith('culture')][0]
-    date_range = None
-    if newest_changes == 'newest-changes':
-        start, end = culture_file.split('culture-index-from-')[1].split('.csv')[0].split('-to-')
-        date_range = get_date_range(start, end)
-    csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes, culture_file)
-
-    df = pd.DataFrame.from_csv(csv_to_read)
+    df, date_range = read_data(newest_changes, 'culture')
 
     # remove nan genders and nan rows
     del df['nan']

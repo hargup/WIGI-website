@@ -2,6 +2,9 @@ from __future__ import print_function
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
 from dateutil.parser import parse
+from .config import data_dir
+import os
+import pandas as pd
 
 
 def get_date_range(start, end):
@@ -34,3 +37,21 @@ def write_plot(plot_func):
                 'date_range': date_range}
 
     return ret_func
+
+
+def read_data(type_data, prefix):
+    """
+    type_data: Can be 'newest' or 'newest-changes'.
+    prefix:
+    """
+    # XXX: Find better names for parameters
+    filelist = os.listdir('{}/{}/'.format(data_dir, type_data))
+    site_linkss_file = [f for f in filelist if f.startswith(prefix)][0]
+    date_range = ""
+    if type_data == 'newest-changes':
+        start, end = site_linkss_file.split('{}-index-from-'.format(prefix))[1].split('.csv')[0].split('-to-')
+        date_range = get_date_range(start, end)
+        print(date_range)
+    csv_to_read = '{}/{}/{}'.format(data_dir, type_data, site_linkss_file)
+    df = pd.DataFrame.from_csv(csv_to_read)
+    return df, date_range

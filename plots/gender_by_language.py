@@ -2,13 +2,9 @@ from __future__ import print_function
 from collections import OrderedDict
 from bokeh.plotting import figure
 from bokeh.models import HoverTool, ColumnDataSource
-from bokeh.resources import CDN
-from bokeh.embed import autoload_static
-import os
 import pandas as pd
 from numpy import max, min
-from .config import data_dir
-from .utils import get_date_range, write_plot
+from .utils import write_plot, read_data
 
 
 # The csv for language codes and their English is taken from
@@ -19,14 +15,7 @@ langdict = dict([(code.replace('-', '_')+'wiki', name) for code, name in zip(wik
 
 @write_plot
 def plot(newest_changes):
-    filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
-    site_linkss_file = [f for f in filelist if f.startswith('site_linkss')][0]
-    date_range = None
-    if newest_changes == 'newest-changes':
-        start, end = site_linkss_file.split('site_linkss-index-from-')[1].split('.csv')[0].split('-to-')
-        date_range = get_date_range(start, end)
-    csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,site_linkss_file)
-    df = pd.DataFrame.from_csv(csv_to_read)
+    df, date_range = read_data(newest_changes, 'site_linkss')
 
     # Taking only wikipedias ignoring wikiquote, wikinews and wikisource
     df = df.loc[list(langdict.keys())]

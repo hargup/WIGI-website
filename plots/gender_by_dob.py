@@ -1,9 +1,7 @@
 import pandas as pd
 from bokeh.plotting import figure
 from bokeh.models import HoverTool
-import os
-from .config import data_dir
-from .utils import get_date_range, write_plot
+from .utils import write_plot, read_data
 
 
 @write_plot
@@ -13,15 +11,7 @@ def plot(newest_changes):
 
     for l in ['b', 'd']:
         acro = 'do'+l
-        filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
-        dox_list = [f for f in filelist if f.startswith(acro)]
-        dox_file = dox_list[0]
-        date_range = None
-        if newest_changes == 'newest-changes':
-            start, end = dox_file.split('{}-index-from-'.format(acro))[1].split('.csv')[0].split('-to-')
-            date_range = get_date_range(start, end)
-        csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes,dox_file)
-        df = pd.DataFrame.from_csv(csv_to_read)
+        df, date_range = read_data(newest_changes, acro)
 
         del df['nan']
         df = df[list(map(lambda x: not pd.isnull(x), df.index))]

@@ -5,22 +5,12 @@ import pandas as pd
 from . import world_countries as wc
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
-import os
-from .config import data_dir
-from .utils import get_date_range, write_plot
+from .utils import write_plot, read_data
 
 
 @write_plot
 def plot(newest_changes):
-    filelist = os.listdir('{}/{}/'.format(data_dir, newest_changes))
-    site_linkss_file = [f for f in filelist if f.startswith('worldmap')][0]
-    date_range = ""
-    if newest_changes == 'newest-changes':
-        start, end = site_linkss_file.split('worldmap-index-from-')[1].split('.csv')[0].split('-to-')
-        date_range = get_date_range(start, end)
-        print(date_range)
-    csv_to_read = '{}/{}/{}'.format(data_dir, newest_changes, site_linkss_file)
-    df = pd.DataFrame.from_csv(csv_to_read)
+    df, date_range = read_data(newest_changes, 'worldmap')
 
     # drop 'NaN' rows
     df = df[list(map(lambda x: not pd.isnull(x), df.index))]
