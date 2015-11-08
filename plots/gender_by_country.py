@@ -5,9 +5,8 @@ import numpy as np
 import pandas as pd
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
-
+from .utils import write_plot, read_data, colorhex_to_tuple
 from . import world_countries as wc
-from .utils import write_plot, read_data
 
 
 @write_plot('country')
@@ -16,6 +15,8 @@ def plot(newest_changes):
 
     # drop 'NaN' rows
     df = df[list(map(lambda x: not pd.isnull(x), df.index))]
+    # drop 'NaN' Score
+    df = df[list(map(lambda x: not pd.isnull(df.ix[x]['Score']), df.index))]
 
     # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
@@ -36,12 +37,23 @@ def plot(newest_changes):
     def fmt(c):
         return int(np.nan_to_num(c))
 
-    # TODO: Pick better colors
+    # Scale determines how do we want to show the differences between
+    # the indexes with very low value trading off with not showing such
+    # differences for higher values
+    if newest_changes == 'newest-changes':
+        scale = 50/np.max(index_vals)
+    else:
+        scale = 6/np.max(index_vals)
+
+    R1, G1, B1 = colorhex_to_tuple('#ff4729')
+    R2, G2, B2 = colorhex_to_tuple('#2fff7c')
+    alpha = 2*(-0.5 + 1/(1 + np.exp(-scale*index_vals))) # sigmoid function
+
     colors = [
         "#%02x%02x%02x" % (fmt(r), fmt(g), fmt(b)) for r, g, b in
-        zip(np.floor(87 - 80*2*(-0.5 + 1/(1 + np.exp(-3*index_vals)))),
-            np.floor(150 - 150*2*(-0.5 + 1/(1 + np.exp(-3*index_vals)))),
-            np.floor(118 - 100*2*(-0.5 + 1/(1 + np.exp(-3*index_vals)))))]
+        zip(np.floor((1-alpha)*R1 + alpha*R2),
+            np.floor((1-alpha)*G1 + alpha*G2),
+            np.floor((1-alpha)*B1 + alpha*B2))]
 
     source = ColumnDataSource(
             data=dict(
