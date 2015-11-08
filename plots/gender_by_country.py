@@ -56,10 +56,19 @@ def plot(newest_changes):
 
     hover = p.select(dict(type=HoverTool))
     hover.point_policy = "follow_mouse"
-    hover.tooltips = OrderedDict([
-        ("wigi", "@wigi_index"),
-        ("Country", "@name"),
-    ])
+
+    # change tooltip according to plot type
+    if newest_changes == 'newest-changes':
+        hover.tooltips = OrderedDict([
+            ("Change in WIGI", "@wigi_index"),
+            ("Country", "@name"),
+        ])
+    else:
+        hover.tooltips = OrderedDict([
+            ("WIGI", "@wigi_index"),
+            ("Country", "@name"),
+        ])
+
 
     # FIX: generate top and bottom tables, currently uses older dataframe
     major = df[df['total'] > 100]
