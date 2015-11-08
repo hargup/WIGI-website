@@ -9,6 +9,12 @@ from bokeh.embed import autoload_static
 from .config import data_dir
 
 
+def colorhex_to_tuple(hexstr):
+    if hexstr.startswith('#'):
+        hexstr = hexstr[1:]
+    return (int(c, base=16) for c in [hexstr[0:2], hexstr[2:4], hexstr[4:6]])
+
+
 def get_date_range(start, end):
     start = parse(start)
     end = parse(end)
