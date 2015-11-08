@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/hargup/WIGI-website.svg)](https://travis-ci.org/hargup/WIGI-website)
+
+-------------------
+
 A skeleton of the website intended to display interactive graphs statistically
 quantifying the gender gap in Wikipedia biographies, through several
 indicators.
