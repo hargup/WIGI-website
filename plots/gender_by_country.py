@@ -54,6 +54,9 @@ def plot(newest_changes):
 
     p.patches(country_xs, country_ys, fill_color=colors, source=source)
 
+    # hide axes
+    p.axis.visible = None
+
     hover = p.select(dict(type=HoverTool))
     hover.point_policy = "follow_mouse"
 
