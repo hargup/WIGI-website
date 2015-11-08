@@ -1,4 +1,5 @@
 bokeh
-nikola
 numpy
 pandas
+markdown
+nikola
