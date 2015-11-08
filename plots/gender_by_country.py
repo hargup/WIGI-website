@@ -1,10 +1,12 @@
 from __future__ import print_function
 from collections import OrderedDict
+
 import numpy as np
 import pandas as pd
-from . import world_countries as wc
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
+
+from . import world_countries as wc
 from .utils import write_plot, read_data
 
 
@@ -53,6 +55,9 @@ def plot(newest_changes):
     p = figure(plot_width=800, plot_height=500, tools=TOOLS)
 
     p.patches(country_xs, country_ys, fill_color=colors, source=source)
+
+    # hide axes
+    p.axis.visible = None
 
     hover = p.select(dict(type=HoverTool))
     hover.point_policy = "follow_mouse"

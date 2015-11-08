@@ -1,7 +1,9 @@
 from __future__ import print_function
+
 import pandas as pd
 from bokeh._legacy_charts import Bar
 from bokeh.models import PrintfTickFormatter
+
 from .utils import write_plot, read_data
 
 
@@ -21,7 +23,7 @@ def plot(newest_changes):
     df['nonbin_per_million'] = df['nonbin_per'] * 1000000
     dfs = df.sort_values('female')
 
-    interesante = ['female', 'male', 'nonbin']
+    interesante = ['female', 'male', 'nonbin', 'total']
 
     p = Bar(dfs[['female', 'male']],
             stacked=True,
@@ -33,7 +35,7 @@ def plot(newest_changes):
 
     p._yaxis.formatter = PrintfTickFormatter(format="%5.1e")
     htmltable = dfs[interesante].sort_values('female', ascending=False)
-    htmltable.columns = ['Women', 'Men', 'Non Binary']
+    htmltable.columns = ['Women', 'Men', 'Non Binary', 'Total']
     top_rows = htmltable.head(10).to_html(na_rep='n/a', classes=['table'])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep='n/a', classes=['table'])
     table_html = [top_rows, bottom_rows]

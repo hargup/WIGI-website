@@ -1,6 +1,9 @@
+from __future__ import print_function
+
 import pandas as pd
 from bokeh.plotting import figure
 from bokeh.models import HoverTool
+
 from .utils import write_plot, read_data
 
 

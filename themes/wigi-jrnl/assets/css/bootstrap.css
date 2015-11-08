@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=News+Cycle:400,700");
+@import url(https://fonts.googleapis.com/css?family=PT+Serif);
 /*!
  * bootswatch v3.3.4+1
  * Homepage: http://bootswatch.com
@@ -11,6 +11,7 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 body {
   margin: 0;
@@ -1084,7 +1085,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PT Sans", "Liberation Sans", "Lucida Grande", sans-serif;
   font-size: 15px;
   line-height: 1.42857143;
   color: #777777;
@@ -1186,7 +1187,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+  font-family: 'PT Serif', 'Linux Libertine', serif;
   font-weight: 700;
   line-height: 1.1;
   color: #000000;
@@ -5842,7 +5843,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PT Sans", "Liberation Sans", "Lucida Grande", sans-serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1.4;
@@ -5949,7 +5950,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PT Sans", "Liberation Sans", "Lucida Grande", sans-serif;
   font-size: 15px;
   font-weight: normal;
   line-height: 1.42857143;
@@ -6580,7 +6581,7 @@ button.close {
 }
 .navbar {
   font-size: 18px;
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+  font-family: 'PT Serif', 'Linux Libertine', serif;
   font-weight: 700;
 }
 .navbar-default .badge {
@@ -6634,7 +6635,7 @@ button.close {
 .jumbotron h4,
 .jumbotron h5,
 .jumbotron h6 {
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+  font-family: 'PT Serif', 'Linux Libertine', serif;
   font-weight: 700;
   color: #000;
 }
