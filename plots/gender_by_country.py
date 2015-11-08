@@ -1,10 +1,12 @@
 from __future__ import print_function
 from collections import OrderedDict
+
 import numpy as np
 import pandas as pd
-from . import world_countries as wc
 from bokeh.models import HoverTool, ColumnDataSource
 from bokeh.plotting import figure
+
+from . import world_countries as wc
 from .utils import write_plot, read_data
 
 

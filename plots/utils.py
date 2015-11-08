@@ -1,10 +1,12 @@
 from __future__ import print_function
+import os
+from dateutil.parser import parse
+
+import pandas as pd
 from bokeh.resources import CDN
 from bokeh.embed import autoload_static
-from dateutil.parser import parse
+
 from .config import data_dir
-import os
-import pandas as pd
 
 
 def get_date_range(start, end):

@@ -1,9 +1,11 @@
 from __future__ import print_function
 from collections import OrderedDict
+
+from numpy import max, min
+import pandas as pd
 from bokeh.plotting import figure
 from bokeh.models import HoverTool, ColumnDataSource
-import pandas as pd
-from numpy import max, min
+
 from .utils import write_plot, read_data
 
 

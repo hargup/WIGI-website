@@ -1,7 +1,9 @@
 from __future__ import print_function
+
 import pandas as pd
 from bokeh._legacy_charts import Bar
 from bokeh.models import PrintfTickFormatter
+
 from .utils import write_plot, read_data
 
 
