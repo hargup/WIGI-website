@@ -4,14 +4,14 @@
     <div
         id="bokeh-change-plot"
         class="bokeh-plot">
-        <h2>${title} ${plots[plot_name]['newest_changes']['date_range']}</h2>
+        <h3>${title} ${plots[plot_name]['newest_changes']['date_range']}</h3>
         ${plots[plot_name]['newest_changes']['plot_tag']}
     </div>
     <div
         class="row">
         <div
         class="col-md-12">
-            <h3> Top 10 </h3>
+            <h4> Top 10 </h4>
             ${plots[plot_name]['newest_changes']['table_html'][0]}
         </div>
     </div>
@@ -19,7 +19,7 @@
         class="row">
         <div
         class="col-md-12">
-            <h3> Bottom 10 </h3>
+            <h4> Bottom 10 </h4>
             ${plots[plot_name]['newest_changes']['table_html'][1]}
         </div>
     </div>
@@ -29,14 +29,14 @@
     <div
         id="bokeh-alltime-plot"
         class="bokeh-plot">
-        <h2>All time</h2>
+        <h3>All time</h3>
         ${plots[plot_name]['newest']['plot_tag']}
     </div>
     <div
         class="row">
         <div
         class="col-md-12">
-            <h3> Top 10 </h3>
+            <h4> Top 10 </h4>
             ${plots[plot_name]['newest']['table_html'][0]}
         </div>
     </div>
@@ -44,7 +44,7 @@
         class="row">
         <div
         class="col-md-12">
-            <h3> Bottom 10 </h3>
+            <h4> Bottom 10 </h4>
             ${plots[plot_name]['newest']['table_html'][1]}
         </div>
     </div>

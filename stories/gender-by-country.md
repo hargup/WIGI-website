@@ -10,8 +10,7 @@
 .. template: gender_by_country.tmpl
 -->
 
-Gender by country
------------------
+# Gender by country
 
 This plot shows the percentage of biographies of women by country of birth.
 Country is determined by seeing if the place of birth is a country, or if it is

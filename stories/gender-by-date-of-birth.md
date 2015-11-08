@@ -10,8 +10,7 @@
 .. template: gender_by_dob.tmpl
 -->
 
-Gender by date of birth and death
----------------------------------
+# Gender by date of birth and death
 
 This plot shows the Date of Birth (DoB) and Date of Death (DoD) of each
 biography in Wikidata, by gender. Non-binary genders, by last count there are 9

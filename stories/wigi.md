@@ -1,21 +1,26 @@
-<!-- 
+<!--
 .. title: Wikipedia Gender Indicators
 .. slug: index
 .. date: 2015-06-09 15:37:45 UTC+05:30
-.. tags: 
-.. category: 
-.. link: 
-.. description: 
+.. tags:
+.. category:
+.. link:
+.. description:
 .. type: text
 .. template: mainpage.tmpl
 -->
 
-<strong>Wi</strong>kipedia <strong>G</strong>ender Indicators (<strong>WIGI</strong>)
--------------------------------------------------------------------------------------
+# <strong>Wi</strong>kipedia <strong>G</strong>ender Indicators (<strong>WIGI</strong>)
 
-It is an unfortunate but unavoidable fact that encyclopedias always have had a gender bias. One of the dimensions of this bias is the contributors’ gender distribution (Thomas 1992; Reagle and Rhue 2011). Just as there were very few women authors among contributors to traditional, printed encyclopedias, recent surveys indicate that women constitute only around 13%-16% of Wikipedia contributors, or Wikipedians (Glott, Schmidt, & Ghosh 2010; Hill and Shaw 2013). 
+<figure style="text-align:center">
+<img src="https://cloud.githubusercontent.com/assets/1494283/10463045/bfbe87f4-71a7-11e5-9851-59778a9f9ee0.jpg"
+     style="width:auto;"/>
+<figcaption>
+    The world's leaders
+</figcaption>
+</figure>
 
-WIGI is a project producing a **open data set** about the
+WIGI is a project producing a <strong>open data set</strong> about the
 *gender, date of birth, place of birth, ethnicity, occupation*, and *language*
 of **biography articles** in all Wikipedias. Our [data
 set](http://wigi.wmflabs.org/snapshot_data/) comes from

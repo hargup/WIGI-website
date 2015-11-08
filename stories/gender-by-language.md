@@ -10,8 +10,7 @@
 .. template: gender_by_language.tmpl
 -->
 
-Gender by language
-------------------
+# Gender by language
 
 This plot shows the top 40 Wikipedia Languages (by number of gendered
 biographies), and compares their number of gendered biographies to female

@@ -10,8 +10,7 @@
 .. template: gender_by_culture.tmpl
 -->
 
-Gender by culture
------------------
+# Gender by culture
 
 This plot shows the number of gendered biographies of men and women in
 Wikidata, by "Culture".

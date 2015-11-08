@@ -21,3 +21,11 @@ footer {
     overflow: hidden;
     margin: 0 auto;
 }
+
+figure {
+    margin: 2em 0 1em 0;
+}
+
+figcaption {
+    margin: .5em;
+}
