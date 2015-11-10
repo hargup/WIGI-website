@@ -21,3 +21,9 @@ The changes show the *change in totals* since last snapshot, for each year.
 
 As of October 2014, only about 58% and 28% of biographies, had date of birth
 and date of death data, respectively, so this data is incomplete.
+
+The following abbreviations have been used in the tables below for conciseness:
+
+* **F** : Female
+* **M** : Male
+* **NB** : Non Binary

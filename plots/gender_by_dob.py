@@ -21,13 +21,13 @@ def plot(newest_changes):
 
         df['total'] = df.sum(axis=1)
         df['nonbin'] = df['total'] - df['male'] - df['female']
-        df['fem_per'] = df['female'] / (df['total'])
-        df['nonbin_per'] = df['nonbin'] / df['total']
+        df['fem_per'] = (df['female']*100 / (df['total'])).round(2)
+        df['nonbin_per'] = (df['nonbin']*100 / df['total']).round(2)
 
         for inte in interesante:
             dox['{}-{}'.format(acro, inte)] = df[inte]
 
-    time_range = (1500, 2015)
+    time_range = (1600, 2015)
 
     dox = dox[time_range[0]: time_range[1]]
 
@@ -51,9 +51,8 @@ def plot(newest_changes):
     hover = p.select(dict(type=HoverTool))
     hover.point_policy = "follow_mouse"
     hover.tooltips = [
-        ("index", "$index"),
-        ("Year of event", "$x"),
-        ("Number of biographies", "$y"),
+        ("Year of event", "@x"),
+        ("Number of biographies", "@y"),
     ]
 
     htmltable = dox[['dob-female', 'dod-female',
@@ -62,11 +61,11 @@ def plot(newest_changes):
                      'dob-fem_per', 'dod-fem_per',
                      'dod-nonbin_per', 'dod-nonbin_per']].sort_values('dob-fem_per', ascending=False)
 
-    htmltable.columns = ['DoB (Female)', 'DoD (Female)',
-                         'DoB (Male)', 'DoD (Male)',
-                         'DoB (Non Binary)', 'DoD (Non Binary)',
-                         'DoB (Female Percentage)', 'DoD (Female Percentage)',
-                         'DoB (Non Binary Percentage)', 'DoD (Non Binary Percentage)']
+    htmltable.columns = ['DoB (F)', 'DoD (F)',
+                         'DoB (M)', 'DoD (M)',
+                         'DoB (NB)', 'DoD (NB)',
+                         'DoB (F) Percent', 'DoD (F) Percent',
+                         'DoB (NB) Percent', 'DoD (NB) Percent']
     top_rows = htmltable.head(10).to_html(na_rep="n/a", classes=["table"])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep="n/a", classes=["table"])
     table_html = [top_rows, bottom_rows]

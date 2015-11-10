@@ -35,7 +35,7 @@ def plot(newest_changes):
 
     p._yaxis.formatter = PrintfTickFormatter(format="%5.1e")
     htmltable = dfs[interesante].sort_values('female', ascending=False)
-    htmltable.columns = ['Women', 'Men', 'Non Binary', 'Total']
+    htmltable.columns = ['Female', 'Male', 'Non Binary', 'Total']
     top_rows = htmltable.head(10).to_html(na_rep='n/a', classes=['table'])
     bottom_rows = htmltable[::-1].head(10).to_html(na_rep='n/a', classes=['table'])
     table_html = [top_rows, bottom_rows]

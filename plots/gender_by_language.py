@@ -30,8 +30,8 @@ def plot(newest_changes):
 
     df['total'] = df.sum(axis=1)
     df['nonbin'] = df['total'] - df['male'] - df['female']
-    df['fem_per'] = (df['female'] / (df['total']))*100
-    df['nonbin_per'] = (df['nonbin'] / df['total'])*100
+    df['fem_per'] = (df['female']*100 / (df['total'])).round(2)
+    df['nonbin_per'] = (df['nonbin']*100 / df['total']).round(2)
 
     # take only top 50 entries
     dfs = df.sort_values('total', ascending=False).head(50)
@@ -63,7 +63,7 @@ def plot(newest_changes):
     hover.tooltips = OrderedDict([
         ("Language wiki", "@index"),
         ("Total biographies", "@total"),
-        ("Percentage female biographies", "@fem_per")
+        ("Female biographies", "@fem_per{1.11} %")
     ])
 
     # rename columns and generate top/bottom tables
