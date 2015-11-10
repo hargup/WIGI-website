@@ -1,5 +1,6 @@
 bokeh
 numpy
+webassets
 pandas
 markdown
 nikola
