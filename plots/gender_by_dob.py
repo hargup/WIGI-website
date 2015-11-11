@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+from numpy import sum, absolute
 import pandas as pd
 from bokeh.plotting import figure
 from bokeh.models import HoverTool
@@ -19,7 +20,8 @@ def plot(newest_changes):
         del df['nan']
         df = df[list(map(lambda x: not pd.isnull(x), df.index))]
 
-        df['total'] = df.sum(axis=1)
+        #df['total'] = df.sum(axis=1)
+        df['total'] = df.apply(lambda x: sum(absolute(x)), axis=1)
         df['nonbin'] = df['total'] - df['male'] - df['female']
         df['fem_per'] = (df['female']*100 / (df['total'])).round(2)
         df['nonbin_per'] = (df['nonbin']*100 / df['total']).round(2)

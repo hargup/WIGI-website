@@ -27,3 +27,8 @@ The following abbreviations have been used in the tables below for conciseness:
 * **F** : Female
 * **M** : Male
 * **NB** : Non Binary
+
+---------------------
+
+**Please note that the tables are sorted in the order of Date of Birth (DoB) -
+Female Percentage.**
