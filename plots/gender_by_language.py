@@ -56,6 +56,10 @@ def plot(newest_changes):
     source = ColumnDataSource(data=cutoff.to_dict(orient='list'))
     p.circle('fem_per', 'total', size=12, line_color="black", fill_alpha=0.8, source=source)
 
+    # label text showing language name
+    p.text(x="fem_per", y="total", text="index", text_color="#333333",
+           text_align="left", text_font_size="8pt",
+           y_offset=-5, source=source)
 
     # setup tools
     hover = p.select(dict(type=HoverTool))
