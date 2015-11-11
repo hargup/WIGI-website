@@ -12,9 +12,10 @@
 
 # Gender by country
 
-This plot shows the percentage of biographies of women by country of birth.
-Country is determined by seeing if the place of birth is a country, or if it is
-a city, see if the city has a country property in Wikidata.
+This plot shows the percentage of biographies of women by country of birth,
+which we call the **WIGI Score**. Country is determined by seeing if the place
+of birth is a country, or if it is a city, see if the city has a country
+property in Wikidata.
 
 The changes show the change in total biographies, and change in percentage
 since the previous snapshot date.

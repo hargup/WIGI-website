@@ -74,10 +74,14 @@ def plot(newest_changes):
     hover = p.select(dict(type=HoverTool))
     hover.point_policy = "follow_mouse"
 
+    # columns to render in tables
+    columns = ['Total', 'Score']
+
     # change tooltip according to plot type
     if newest_changes == 'newest-changes':
+        columns[1] = 'Change in score'
         hover.tooltips = OrderedDict([
-            ("Change in WIGI", "@wigi_index"),
+            ("Change in WIGI", "@wigi_index{1.5}"),
             ("Country", "@name"),
         ])
     else:
@@ -94,7 +98,7 @@ def plot(newest_changes):
     major.rename(dict((code, world_countries[code]['name'])
                       for code in labels), inplace=True)
     sorted_major = major.sort_values('Score', ascending=False)
-    sorted_major.columns = ['Total', 'Score']
+    sorted_major.columns = columns
     top_rows = sorted_major.head(10).to_html(classes=['table'])
     bottom_rows = sorted_major[::-1].head(10).to_html(classes=['table'])
 
