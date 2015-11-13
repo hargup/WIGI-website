@@ -17,8 +17,8 @@ biographies), and compares their number of gendered biographies to female
 percentage of those biographies. **Hover to view the Language
 name**.
 
-The changes show the *number of biographies added* and the *female
-percentage change* between the two latest snapshots.
+The changes show the *number of biographies* added and the *female percentage
+change* between the two latest snapshots.
 
 As of October 2014 about 99% of biographies were attached to at least one
 Wikipedia site, so this data is mostly complete.

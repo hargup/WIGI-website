@@ -13,13 +13,14 @@
 # Gender by culture
 
 This plot shows the number of gendered biographies of men and women in
-Wikidata, by "Culture".
+Wikidata, by *Culture*.
 
 **culture** is determined by using translating ethnic group, place of birth, and
 citizenship into 1 of 9 world cultures as per [Inglehart-Welzel map of the
 world](https://en.wikipedia.org/wiki/Inglehart%E2%80%93Welzel_cultural_map_of_the_world)
-with Mechanical Turk. Then we take the consensus of the three aggregated
-variables. All aggregation maps are available for inspection [on
+with [Mechanical Turk](https://en.wikipedia.org/wiki/Amazon_Mechanical_Turk).
+Then we take the consensus of the three aggregated variables. All aggregation
+maps are available for inspection [on
 github](https://github.com/notconfusing/WIGI/tree/master/helpers/aggregation_maps).
 
 As of October 2014, only about 45% of biographies, had culture, so this data is
