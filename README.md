@@ -2,20 +2,19 @@
 
 -------------------
 
-A skeleton of the website intended to display interactive graphs statistically
-quantifying the gender gap in Wikipedia biographies, through several
-indicators.
+WIGI is a project producing a <strong>open data set</strong> about the
+*gender, date of birth, place of birth, ethnicity, occupation*, and *language*
+of **biography articles** in all Wikipedias. Our [data
+set](http://wigi.wmflabs.org/snapshot_data/) comes from
+[Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), the database the
+feeds Wikipedia, and is updated weekly. This website shows a few demonstrations
+of what can be done with that information.
 
-The project was conceived by Max Klein (https://notconfusing.com) and is
-[funded](https://meta.wikimedia.org/wiki/Grants:IdeaLab/WIGI:_Wikipedia_Gender_Index)
-by Wikimedia organization through an [individual engagement
-grant](https://meta.wikimedia.org/wiki/Grants:IEG). Development is continued by
-a Max himself and a voluntarily assembled team of researchers, developers and
-designers.
 
-Read the complete [prototype research](http://arxiv.org/abs/1502.03086) and
-[preliminary
-results](http://notconfusing.com/preliminary-results-from-wigi-the-wikipedia-gender-inequality-index/).
+This project started as a [personal research
+interest](http://arxiv.org/abs/1502.03086), and is now [funded by a Wikimedia
+Foundation
+Grant](https://meta.wikimedia.org/wiki/Grants:IEG/WIGI:_Wikipedia_Gender_Index).
 
 Design
 ======
@@ -31,27 +30,48 @@ Country (World Map), Gender by Date of Birth, and Wikipedia Language by Gender.
 Run it locally
 ==============
 
-To run the website locally, ensure that you have installed latest version of
-Nikola and Bokeh. We recommended to use [conda](http://conda.pydata.org/docs/),
-which is an open source python package and environment management tool. The
-installation instructions can be found on their respective websites. Alternatively,
-if you already have [pip](https://pip.pypa.io/en/stable/) installed, you can
-run the following command to install the dependencies.
+Getting the data
+----------------
+
+To run the site offline, you must download a set `newest` and `newest-changes`
+snapshot data from the server. A tar file containing these latest changes is
+available at [snapshot data](http://wigi.wmflabs.org/snapshot_data).
+
+Please download and extract at a convenient location.
+
+
+Running the site
+----------------
+
+We recommended installing [conda](http://conda.pydata.org/miniconda.html), an
+open source python package and environment management tool. The installation
+instructions can be found on their respective websites. **Please install the
+Python 3 version or create a Python 3 environment as current setup supports
+only Python 3.**
+
+Once you have cloned the repository, run the following command inside the
+directory to install dependencies:
 
 ```
 pip install -r requirements.txt
 ```
 
-Once the dependencies are installed, run the following set of commands:
+In case `pip` is missing, run `conda install pip`. Once the installation is
+complete (might take a while), next step is to configure the location to your
+data directory.
+
+Open `config.py.sample` inside the `plots/` folder and edit the `data_dir` path
+to the location where you extracted `snapshot_data` in previous step. Rename
+the file to `config.py` or create a new one if you wish.
+
+Finally, run:
 
 ```
-git clone https://github.com/hargup/WIGI-website
-cd WIGI-website
 nikola build && nikola serve
 ```
 
-If everything goes fine, you should be able to see WIGI website at
-127.0.0.1:8000.
+If everything goes fine, you should be able to see WIGI website in action at
+[127.0.0.1:8000](http://127.0.0.1:8000).
 
 Please note that you need use the Nikola provided server to serve the requests.
 The output of `nikola build` is a self contained, static website in the
@@ -80,35 +100,39 @@ HTML pages from templates.
 
 This specifies the template to be used for creating the `gender_by_country.html`
 file. The templates are located in `templates/` directory.
-
 2. Templates instruct how to build web page and where to embed Bokeh graph. For
    example, if you open `gender_by_country.tmpl` for example, you can find the
 following block
     ```
-    <%block name="plot">
-        ${gender_by_country_plot}
-    </%block>
+    ${plot.changes('gender_by_country')}
+    ${plot.alltime('gender_by_country')}
     ```
-which embeds the plot data (through `gender_by_country` plot) within the `plot`
-block of the HTML page and renders it further.
-
+which embeds the plot data (using a `plot_helper.tmpl` template file) on the
+page and renders it.
 3. The interesting part, as to how Nikola templates receive the plot data, can
    be answered by inspecting `conf.py`. When `nikola build` is run, first
 `conf.py` is executed. In this file, we import our Bokeh plot generating
 functions and generate respective plots' data. These data are then made
-available to all the Nikola templates by putting them into `GLOBAL_CONTEXT`.
+available to all the Nikola templates as a `plots` dictionary by putting them
+into `GLOBAL_CONTEXT`.
 
     ```
     GLOBAL_CONTEXT = {
-            "gender_by_country_plot": gender_by_country.plot(),
-            "gender_by_culture_plot": gender_by_culture.plot(),
-            "gender_by_dob_plot": gender_by_dob.plot(),
-            "language_by_gender_plot": language_by_gender.plot()
+        'plots' : {
+            'gender_by_country': {
+                'newest': gender_by_country.plot('newest'),
+                'newest_changes': gender_by_country.plot('newest-changes')
+                },
+            'gender_by_culture': {
+                'newest': gender_by_culture.plot('newest'),
+                'newest_changes': gender_by_culture.plot('newest-changes')
+                },
+            ...
         }
     ```
 
-    These variables were referenced in the respective template files (as explained
-    in point 2) to embed the plot data.
+    These variables were referenced in the respective template files (as
+explained in point (2) to embed the plot data.
 
 All of this happens automatically by running `nikola build`.
 
@@ -131,10 +155,8 @@ build && nikola serve`.
 Using new data
 ==============
 
-All the data used by Bokeh scripts can be found in `data/` directory in
-repository root. If you want to use new data, update the respective csv files
-with suitable data. It is recommended to keep new data files in this directory
-only.
+Just add any updated data to the `data_dir` you have used in the `config.py`
+file, and let your script use it.
 
 Contributors
 ============
@@ -144,6 +166,6 @@ Max Klein (@notconfusing), Vivek Rai (@vivekiitkgp), Harsh Gupta (@hargup)
 License
 =======
 
-All source code files and content are available under MIT License and content
-is available under a [Creative Commons Attribution-ShareAlike 4.0 International
+All source code files are available under MIT License and content is available
+under a [Creative Commons Attribution-ShareAlike 4.0 International
 License](http://creativecommons.org/licenses/by-sa/4.0/) respectively.
