@@ -94,21 +94,24 @@ HTML pages from templates.
    example, `gender by country.md` post has the following one line in the
    description:
 
-   ```
-   .. template: gender_by_country.tmpl
-   ```
+```
+.. template: gender_by_country.tmpl
+```
 
 This specifies the template to be used for creating the `gender_by_country.html`
 file. The templates are located in `templates/` directory.
+
 2. Templates instruct how to build web page and where to embed Bokeh graph. For
    example, if you open `gender_by_country.tmpl` for example, you can find the
-following block
-    ```
-    ${plot.changes('gender_by_country')}
-    ${plot.alltime('gender_by_country')}
-    ```
-which embeds the plot data (using a `plot_helper.tmpl` template file) on the
-page and renders it.
+following block which embeds the plot data (using a `plot_helper.tmpl` template
+file) on the page and renders it.
+
+
+```
+${plot.changes('gender_by_country')}
+${plot.alltime('gender_by_country')}
+```
+
 3. The interesting part, as to how Nikola templates receive the plot data, can
    be answered by inspecting `conf.py`. When `nikola build` is run, first
 `conf.py` is executed. In this file, we import our Bokeh plot generating
@@ -116,20 +119,20 @@ functions and generate respective plots' data. These data are then made
 available to all the Nikola templates as a `plots` dictionary by putting them
 into `GLOBAL_CONTEXT`.
 
-    ```
-    GLOBAL_CONTEXT = {
-        'plots' : {
-            'gender_by_country': {
-                'newest': gender_by_country.plot('newest'),
-                'newest_changes': gender_by_country.plot('newest-changes')
-                },
-            'gender_by_culture': {
-                'newest': gender_by_culture.plot('newest'),
-                'newest_changes': gender_by_culture.plot('newest-changes')
-                },
-            ...
-        }
-    ```
+```
+GLOBAL_CONTEXT = {
+    'plots' : {
+        'gender_by_country': {
+            'newest': gender_by_country.plot('newest'),
+            'newest_changes': gender_by_country.plot('newest-changes')
+            },
+        'gender_by_culture': {
+            'newest': gender_by_culture.plot('newest'),
+            'newest_changes': gender_by_culture.plot('newest-changes')
+            },
+        ...
+    }
+```
 
     These variables were referenced in the respective template files (as
 explained in point (2) to embed the plot data.
