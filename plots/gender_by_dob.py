@@ -68,11 +68,11 @@ def plot(newest_changes):
                          'DoB (NB)', 'DoD (NB)',
                          'DoB (F) Percent', 'DoD (F) Percent',
                          'DoB (NB) Percent', 'DoD (NB) Percent']
-    top_rows = htmltable.head(10).to_html(na_rep="n/a", classes=["table"])
-    bottom_rows = htmltable[::-1].head(10).to_html(na_rep="n/a", classes=["table"])
-    table_html = [top_rows, bottom_rows]
+    top_rows = htmltable.head(10)
+    bottom_rows = htmltable[::-1].head(10)
+    table = [top_rows, bottom_rows]
 
-    return p, date_range, table_html
+    return p, date_range, table
 
 if __name__ == "__main__":
     print(plot('newest'))

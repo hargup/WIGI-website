@@ -99,12 +99,12 @@ def plot(newest_changes):
                       for code in labels), inplace=True)
     sorted_major = major.sort_values('Score', ascending=False)
     sorted_major.columns = columns
-    top_rows = sorted_major.head(10).to_html(classes=['table'])
-    bottom_rows = sorted_major[::-1].head(10).to_html(classes=['table'])
+    top_rows = sorted_major.head(10)
+    bottom_rows = sorted_major[::-1].head(10)
 
-    table_html = [top_rows, bottom_rows]
+    table = [top_rows, bottom_rows]
 
-    return p, date_range, table_html
+    return p, date_range, table
 
 if __name__ == "__main__":
     print(plot('newest'))

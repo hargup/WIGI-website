@@ -72,12 +72,12 @@ def plot(newest_changes):
 
     # rename columns and generate top/bottom tables
     cutoff.columns=['Wiki', 'Total','Female (%)']
-    top_rows = cutoff.head(10).to_html(na_rep='n/a', classes=["table"])
-    bottom_rows = cutoff[::-1].head(10).to_html(na_rep='n/a', classes=["table"])
+    top_rows = cutoff.head(10)
+    bottom_rows = cutoff[::-1].head(10)
 
-    table_html = [top_rows, bottom_rows]
+    table = [top_rows, bottom_rows]
 
-    return p, date_range, table_html
+    return p, date_range, table
 
 
 if __name__ == "__main__":
