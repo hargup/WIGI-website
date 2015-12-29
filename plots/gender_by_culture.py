@@ -2,7 +2,7 @@ from __future__ import print_function
 
 import pandas as pd
 from bokeh._legacy_charts import Bar
-from bokeh.models import PrintfTickFormatter
+from bokeh.models import NumeralTickFormatter
 
 from .utils import write_plot, read_data
 
@@ -33,7 +33,7 @@ def plot(newest_changes):
             height=500,
             legend='top_left')
 
-    p._yaxis.formatter = PrintfTickFormatter(format="%5.1e")
+    p._yaxis.formatter = NumeralTickFormatter(format='0,0')
     htmltable = dfs[interesante].sort_values('female', ascending=False)
     htmltable.columns = ['Female', 'Male', 'Non Binary', 'Total']
     top_rows = htmltable.head(10).to_html(na_rep='n/a', classes=['table'])
