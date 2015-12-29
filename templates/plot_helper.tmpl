@@ -11,18 +11,18 @@
         class="row">
         <div
         class="table-responsive col-md-12">
-            <h4> Top 10 </h4>
+            <h4> Top ${len(plots[plot_name]['newest_changes']['table_html'][0])}</h4>
             ## replace workaround to remove hard-coded pandas table border
             ## See, pandas issue #11563
-            ${plots[plot_name]['newest_changes']['table_html'][0].replace('border="1"', '')}
+            ${plots[plot_name]['newest_changes']['table_html'][0].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
         </div>
     </div>
     <div
         class="row">
         <div
         class="table-responsive col-md-12">
-            <h4> Bottom 10 </h4>
-            ${plots[plot_name]['newest_changes']['table_html'][1].replace('border="1"', '')}
+            <h4> Bottom ${len(plots[plot_name]['newest_changes']['table_html'][1])} </h4>
+            ${plots[plot_name]['newest_changes']['table_html'][1].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
         </div>
     </div>
 </%def>
@@ -38,16 +38,16 @@
         class="row">
         <div
         class="table-responsive col-md-12">
-            <h4> Top 10 </h4>
-            ${plots[plot_name]['newest']['table_html'][0].replace('border="1"', '')}
+            <h4> Top ${len(plots[plot_name]['newest']['table_html'][0])} </h4>
+            ${plots[plot_name]['newest']['table_html'][0].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
         </div>
     </div>
     <div
         class="row">
         <div
         class="table-responsive col-md-12">
-            <h4> Bottom 10 </h4>
-            ${plots[plot_name]['newest']['table_html'][1].replace('border="1"', '')}
+            <h4> Bottom ${len(plots[plot_name]['newest']['table_html'][1])} </h4>
+            ${plots[plot_name]['newest']['table_html'][1].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
         </div>
     </div>
 </%def>

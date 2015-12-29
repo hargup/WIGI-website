@@ -4,7 +4,9 @@ from collections import OrderedDict
 from numpy import max, min
 import pandas as pd
 from bokeh.plotting import figure
-from bokeh.models import HoverTool, ColumnDataSource
+from bokeh.models import (HoverTool,
+                          ColumnDataSource,
+                          NumeralTickFormatter)
 
 from .utils import write_plot, read_data
 
@@ -12,7 +14,8 @@ from .utils import write_plot, read_data
 # The csv for language codes and their English is taken from
 # http://wikistats.wmflabs.org/
 wikis = pd.DataFrame.from_csv('./plots/wikipedias.csv')
-langdict = dict([(code.replace('-', '_')+'wiki', name) for code, name in zip(wikis.lang, wikis.id)])
+langdict = dict([(code.replace('-', '_')+'wiki', name) for code, name in
+                 zip(wikis.lang, wikis.id)])
 
 
 @write_plot('language')
@@ -36,7 +39,7 @@ def plot(newest_changes):
     # take only top 50 entries
     dfs = df.sort_values('total', ascending=False).head(50)
     fsort_dfs = dfs.sort_values('fem_per', ascending=False)
-    cutoff = fsort_dfs[['total','fem_per']].reset_index()
+    cutoff = fsort_dfs[['total', 'female', 'fem_per']].reset_index()
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
 
@@ -52,9 +55,11 @@ def plot(newest_changes):
 
     p.xaxis.axis_label = 'Percentage female biographies'
     p.yaxis.axis_label = 'Total biographies'
+    p.yaxis[0].formatter = NumeralTickFormatter(format='0,0')
 
     source = ColumnDataSource(data=cutoff.to_dict(orient='list'))
-    p.circle('fem_per', 'total', size=12, line_color="black", fill_alpha=0.8, source=source)
+    p.circle('fem_per', 'total', size=12, line_color="black", fill_alpha=0.8,
+             source=source)
 
     # label text showing language name
     p.text(x="fem_per", y="total", text="index", text_color="#333333",
@@ -67,17 +72,18 @@ def plot(newest_changes):
     hover.tooltips = OrderedDict([
         ("Language wiki", "@index"),
         ("Total biographies", "@total"),
+        ("Total female biographies", "@female"),
         ("Female biographies", "@fem_per{1.11} %")
     ])
 
     # rename columns and generate top/bottom tables
-    cutoff.columns=['Wiki', 'Total','Female (%)']
-    top_rows = cutoff.head(10).to_html(na_rep='n/a', classes=["table"])
-    bottom_rows = cutoff[::-1].head(10).to_html(na_rep='n/a', classes=["table"])
+    cutoff.columns = ['Wiki', 'Total', 'Female', 'Female (%)']
+    top_rows = cutoff.head(10)
+    bottom_rows = cutoff[::-1].head(10)
 
-    table_html = [top_rows, bottom_rows]
+    table = [top_rows, bottom_rows]
 
-    return p, date_range, table_html
+    return p, date_range, table
 
 
 if __name__ == "__main__":
