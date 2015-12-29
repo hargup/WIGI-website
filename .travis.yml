@@ -4,7 +4,8 @@ python:
 
 # fetch data from server, setup config
 before_install:
-  - wget -r --no-parent -nH -nv --reject "index.html*" 'http://wigi.wmflabs.org/snapshot_data/'
+  - wget -r --no-parent -nH -nv --reject "index.html*" 'http://wigi.wmflabs.org/snapshot_data/newest/'
+  - wget -r --no-parent -nH -nv --reject "index.html*" 'http://wigi.wmflabs.org/snapshot_data/newest-changes/'
   - echo "data_dir = 'snapshot_data'" > plots/config.py
 
 install:
