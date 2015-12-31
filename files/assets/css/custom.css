@@ -29,3 +29,11 @@ figure {
 figcaption {
     margin: .5em;
 }
+
+.bokeh-plot {
+	padding-bottom: 40px;
+}
+
+#toc {
+	padding: 20px;
+}
