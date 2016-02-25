@@ -5,7 +5,7 @@ import pandas as pd
 from bokeh.plotting import figure
 from bokeh.models import HoverTool
 
-from .utils import write_plot, read_data
+from .utils import write_plot, read_data, fix_nan_inf
 
 
 @write_plot('dob')
@@ -25,6 +25,9 @@ def plot(newest_changes):
         df['nonbin'] = df['total'] - df['male'] - df['female']
         df['fem_per'] = (df['female']*100 / (df['total'])).round(2)
         df['nonbin_per'] = (df['nonbin']*100 / df['total']).round(2)
+
+        fix_nan_inf(df['fem_per'])
+        fix_nan_inf(df['nonbin_per'])
 
         for inte in interesante:
             dox['{}-{}'.format(acro, inte)] = df[inte]

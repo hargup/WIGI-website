@@ -5,7 +5,7 @@ from bokeh._legacy_charts import Bar
 from bokeh.models import NumeralTickFormatter
 from numpy import round
 
-from .utils import write_plot, read_data
+from .utils import write_plot, read_data, fix_nan_inf
 
 
 @write_plot('culture')
@@ -22,6 +22,11 @@ def plot(newest_changes):
     df['nonbin_per'] = df['nonbin'] / df['total'] * 100
     df['fem_per_million'] = df['fem_per'] * 10000
     df['nonbin_per_million'] = df['nonbin_per'] * 10000
+
+    fix_nan_inf(df['fem_per'])
+    fix_nan_inf(df['nonbin_per'])
+    fix_nan_inf(df['fem_per_million'])
+    fix_nan_inf(df['nonbin_per_million'])
 
     # sort, process
     dfs = df.sort_values('female')
