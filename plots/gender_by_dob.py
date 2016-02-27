@@ -33,6 +33,11 @@ def plot(newest_changes):
 
     dox = dox[time_range[0]: time_range[1]]
 
+    has_changes = dox.abs().sum().sum() != 0
+
+    if not has_changes:
+        return None, None, None, False
+
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save"
     p = figure(plot_height=500, plot_width=800, tools=TOOLS)
 
@@ -72,7 +77,7 @@ def plot(newest_changes):
     bottom_rows = htmltable[::-1].head(10)
     table = [top_rows, bottom_rows]
 
-    return p, date_range, table
+    return p, date_range, table, True
 
 if __name__ == "__main__":
     print(plot('newest'))

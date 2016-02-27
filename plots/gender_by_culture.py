@@ -16,6 +16,11 @@ def plot(newest_changes):
     del df['nan']
     df = df[list(map(lambda x: not pd.isnull(x), df.index))]
 
+    has_changes = df.abs().sum().sum() != 0
+
+    if not has_changes:
+        return None, None, None, False
+
     df['total'] = df.sum(axis=1)
     df['nonbin'] = df['total'] - df['male'] - df['female']
     df['fem_per'] = df['female'] / (df['total']) * 100
@@ -44,7 +49,7 @@ def plot(newest_changes):
     bottom_rows = htmltable[::-1].head(10)
     table = [top_rows, bottom_rows]
 
-    return p, date_range, table
+    return p, date_range, table, True
 
 if __name__ == "__main__":
     print(plot('newest'))

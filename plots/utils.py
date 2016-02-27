@@ -27,21 +27,24 @@ def get_date_range(start, end):
 def write_plot(characteristic):
     def write_plot_decorator(plot_func):
         def wrapped_func(newest_changes):
-            p, date_range, table_html = plot_func(newest_changes)
+            p, date_range, table_html, has_changes = plot_func(newest_changes)
+            if has_changes:
+                js_filename = "gender_by_{}_{}.js".format(characteristic,
+                                                        newest_changes)
+                script_path = "./assets/js/"
+                output_path = "./files/assets/js/"
 
-            js_filename = "gender_by_{}_{}.js".format(characteristic,
-                                                      newest_changes)
-            script_path = "./assets/js/"
-            output_path = "./files/assets/js/"
+                js, tag = autoload_static(p, CDN, script_path + js_filename)
 
-            js, tag = autoload_static(p, CDN, script_path + js_filename)
-
-            with open(output_path + js_filename, 'w') as js_file:
-                js_file.write(js)
+                with open(output_path + js_filename, 'w') as js_file:
+                    js_file.write(js)
+            else:
+                tag, table_html = None, None
 
             return {'plot_tag': tag,
                     'table_html': table_html,
-                    'date_range': date_range}
+                    'date_range': date_range,
+                    'has_changes': has_changes}
 
         return wrapped_func
     return write_plot_decorator
