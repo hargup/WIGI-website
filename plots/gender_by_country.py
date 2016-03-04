@@ -18,6 +18,12 @@ def plot(newest_changes):
     # drop 'NaN' Score
     df = df[list(map(lambda x: not pd.isnull(df.ix[x]['Score']), df.index))]
 
+
+    has_changes = df.abs().sum().sum() != 0
+
+    if not has_changes:
+        return None, None, None, False
+
     # https://github.com/chdoig/pyladiesatx-bokeh-tutorial
     world_countries = wc.data.copy()
 
@@ -104,7 +110,7 @@ def plot(newest_changes):
 
     table = [top_rows, bottom_rows]
 
-    return p, date_range, table
+    return p, date_range, table, True
 
 if __name__ == "__main__":
     print(plot('newest'))
