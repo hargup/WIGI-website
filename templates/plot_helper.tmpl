@@ -1,5 +1,15 @@
 ## -*- coding: utf-8 -*-
 
+<%def name="toc()">
+		<nav id="toc">
+		<h5>On this page</h5>
+			<ul>
+				<li><a href="#bokeh-change-plot"> Changes since last week</a> </li>
+				<li><a href="#bokeh-alltime-plot"> All time changes </a> </li>
+			</ul>
+		</nav>
+</%def>
+
 <%def name="changes(plot_name, post=None, title='Changes')">
     %if plots[plot_name]['newest_changes']['has_changes']:
     <div
@@ -7,28 +17,25 @@
         class="bokeh-plot">
         <h3>${title} ${plots[plot_name]['newest_changes']['date_range']}</h3>
         ${plots[plot_name]['newest_changes']['plot_tag']}
-    </div>
-    <div
-        class="row">
-        <div
-        class="table-responsive col-md-12">
-            <h4> Top ${len(plots[plot_name]['newest_changes']['table_html'][0])}</h4>
-            ## replace workaround to remove hard-coded pandas table border
-            ## See, pandas issue #11563
-            ${plots[plot_name]['newest_changes']['table_html'][0].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
-        </div>
-    </div>
-    <div
-        class="row">
-        <div
-        class="table-responsive col-md-12">
-            <h4> Bottom ${len(plots[plot_name]['newest_changes']['table_html'][1])} </h4>
-            ${plots[plot_name]['newest_changes']['table_html'][1].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
-        </div>
-    </div>
-    %else:
-    <h3>No Changes for ${plots[plot_name]['newest_changes']['date_range']}</h3>
-    %endif
+			<div
+					class="row">
+					<div
+					class="table-responsive col-md-12">
+							<h4> Top ${len(plots[plot_name]['newest_changes']['table_html'][0])}</h4>
+							## replace workaround to remove hard-coded pandas table border
+							## See, pandas issue #11563
+							${plots[plot_name]['newest_changes']['table_html'][0].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
+					</div>
+			</div>
+			<div
+					class="row">
+					<div
+					class="table-responsive col-md-12">
+							<h4> Bottom ${len(plots[plot_name]['newest_changes']['table_html'][1])} </h4>
+							${plots[plot_name]['newest_changes']['table_html'][1].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
+					</div>
+			</div>
+		</div>
 </%def>
 
 <%def name="alltime(plot_name, post=None)">
@@ -37,21 +44,21 @@
         class="bokeh-plot">
         <h3>All time</h3>
         ${plots[plot_name]['newest']['plot_tag']}
-    </div>
-    <div
-        class="row">
-        <div
-        class="table-responsive col-md-12">
-            <h4> Top ${len(plots[plot_name]['newest']['table_html'][0])} </h4>
-            ${plots[plot_name]['newest']['table_html'][0].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
-        </div>
-    </div>
-    <div
-        class="row">
-        <div
-        class="table-responsive col-md-12">
-            <h4> Bottom ${len(plots[plot_name]['newest']['table_html'][1])} </h4>
-            ${plots[plot_name]['newest']['table_html'][1].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
-        </div>
-    </div>
+			<div
+					class="row">
+					<div
+					class="table-responsive col-md-12">
+							<h4> Top ${len(plots[plot_name]['newest']['table_html'][0])} </h4>
+							${plots[plot_name]['newest']['table_html'][0].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
+					</div>
+			</div>
+			<div
+					class="row">
+					<div
+					class="table-responsive col-md-12">
+							<h4> Bottom ${len(plots[plot_name]['newest']['table_html'][1])} </h4>
+							${plots[plot_name]['newest']['table_html'][1].to_html(na_rep='n/a', classes=['table']).replace('border="1"', '')}
+					</div>
+			</div>
+		</div>
 </%def>

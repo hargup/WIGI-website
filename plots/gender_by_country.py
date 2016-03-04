@@ -73,6 +73,9 @@ def plot(newest_changes):
     p = figure(plot_width=800, plot_height=500, tools=TOOLS)
 
     p.patches(country_xs, country_ys, fill_color=colors, source=source)
+#    for i, _color in enumerate(colors):
+#        print(_color)
+#        p.rect(-100, 0+4*i, color=_color, height=4, width=10)
 
     # hide axes
     p.axis.visible = None
