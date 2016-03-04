@@ -26,8 +26,15 @@ def plot(newest_changes):
     df = df.loc[list(langdict.keys())]
     df.rename(langdict, inplace=True)
 
-    # no_gender_perc = df['nan'].sum() / df.sum().sum()
-    # print('no gender %', no_gender_perc)
+    has_changes = df.abs().sum().sum() != 0
+
+    if not has_changes:
+        return None, None, None, False
+
+    print("has_changes %s" % (has_changes))
+
+    no_gender_perc = df['nan'].sum() / df.sum().sum()
+    print('no gender %', no_gender_perc)
 
     del df['nan']
 
@@ -85,7 +92,7 @@ def plot(newest_changes):
 
     table = [top_rows, bottom_rows]
 
-    return p, date_range, table
+    return p, date_range, table, True
 
 
 if __name__ == "__main__":
