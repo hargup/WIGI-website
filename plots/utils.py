@@ -66,3 +66,10 @@ def read_data(type_data, prefix):
     csv_to_read = '{}/{}/{}'.format(data_dir, type_data, site_linkss_file)
     df = pd.DataFrame.from_csv(csv_to_read)
     return df, date_range
+
+
+def fix_nan_inf(df):
+    # XXX: This is a hack for getting nans and inf get passed to json, if you
+    # run into unusal plots look here.
+    df.replace(float('nan'), 0, inplace=True)
+    df.replace(float('inf'), 100, inplace=True)

@@ -8,7 +8,7 @@ from bokeh.models import (HoverTool,
                           ColumnDataSource,
                           NumeralTickFormatter)
 
-from .utils import write_plot, read_data
+from .utils import write_plot, read_data, fix_nan_inf
 
 
 # The csv for language codes and their English is taken from
@@ -47,6 +47,8 @@ def plot(newest_changes):
     dfs = df.sort_values('total', ascending=False).head(50)
     fsort_dfs = dfs.sort_values('fem_per', ascending=False)
     cutoff = fsort_dfs[['total', 'female', 'fem_per']].reset_index()
+
+    fix_nan_inf(cutoff['fem_per'])
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
 
