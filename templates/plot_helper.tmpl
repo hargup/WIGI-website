@@ -37,7 +37,12 @@
         </div>
     </div>
     %else:
-    <h3>No Changes for ${plots[plot_name]['newest_changes']['date_range']}</h3>
+    {% set date_range = ${plots[plot_name]['newest_changes']['date_range']} %}
+        %if date_range:
+        <h3>No Changes for ${date_range}</h3>
+        %else:
+        <h3>No Changes</h3>
+        %endif
     %endif
 </%def>
 
