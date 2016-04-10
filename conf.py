@@ -133,7 +133,7 @@ NAVIGATION_LINKS = {
         ("/gender-by-country.html", "Gender by Country"),
         ("/gender-by-date-of-birth.html", "Gender by Date of Birth"),
         ("/gender-by-language.html", "Gender by Wikipedia Language"),
-        ("http://wigi.wmflabs.org/snapshot_data/", "<i class='fa fa-folder'></i> Data")
+        ("/data.html", "<i class='fa fa-folder'></i> Data")
     ),
 }
 
