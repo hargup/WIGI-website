@@ -20,5 +20,5 @@ property in Wikidata.
 The changes show the change in total biographies, and change in percentage
 since the previous snapshot date.
 
-As of October 2014, only about 24% of biographies, had place of birth, so this
+As of January 2016, only about 30% of biographies, had place of birth, so this
 data is incomplete.

@@ -20,11 +20,11 @@ from plots import gender_by_language
 
 
 # Data about this site
-BLOG_AUTHOR = "WIGI Dev Team"  # (translatable)
-BLOG_TITLE = "WIGI"  # (translatable)
+BLOG_AUTHOR = "WHGI Dev Team"  # (translatable)
+BLOG_TITLE = "WHGI"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://wigi.wmflabs.org/"
+SITE_URL = "http://whgi.wmflabs.org/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://tools.wmflabs.org/wigi/"

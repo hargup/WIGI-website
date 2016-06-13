@@ -23,5 +23,5 @@ Then we take the consensus of the three aggregated variables. All aggregation
 maps are available for inspection [on
 github](https://github.com/notconfusing/WIGI/tree/master/helpers/aggregation_maps).
 
-As of October 2014, only about 45% of biographies, had culture, so this data is
+As of January 2016, only about 65% of biographies, had culture, so this data is
 incomplete.

@@ -21,7 +21,7 @@ The changes show the *change in totals* since [last
 snapshot](http://wigi.wmflabs.org/snapshot_data/newest-changes/), for each
 year.
 
-As of October 2014, only about 58% and 28% of biographies, had date of birth
+As of January 2016, only about 72% and 36% of biographies, had date of birth
 and date of death data, respectively, so this data is incomplete.
 
 The following abbreviations have been used in the tables below for conciseness:
