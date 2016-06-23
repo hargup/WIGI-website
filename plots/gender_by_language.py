@@ -47,16 +47,17 @@ def plot(newest_changes):
     dfs = df.sort_values('total', ascending=False).head(50)
     fsort_dfs = dfs.sort_values('fem_per', ascending=False)
     cutoff = fsort_dfs[['total', 'female', 'fem_per']].reset_index()
+    cutoff_plot = cutoff[cutoff['total'] > 0]
 
     fix_nan_inf(cutoff['fem_per'])
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
 
     # adjust scale
-    y_max = max(cutoff['total'])*1.2
-    y_min = min(cutoff['total'])*0.8
-    x_max = max(cutoff['fem_per'])*1.1
-    x_min = min(cutoff['fem_per']) - x_max*.05
+    y_max = max(cutoff_plot['total'])*1.2
+    y_min = min(cutoff_plot['total'])*0.8
+    x_max = max(cutoff_plot['fem_per'])*1.1
+    x_min = min(cutoff_plot['fem_per']) - x_max*.05
 
     p = figure(x_axis_type="linear", y_axis_type="log",
                x_range=[x_min, x_max], y_range=[y_min, y_max], tools=TOOLS,
@@ -66,7 +67,7 @@ def plot(newest_changes):
     p.yaxis.axis_label = 'Total biographies'
     p.yaxis[0].formatter = NumeralTickFormatter(format='0,0')
 
-    source = ColumnDataSource(data=cutoff.to_dict(orient='list'))
+    source = ColumnDataSource(data=cutoff_plot.to_dict(orient='list'))
     p.circle('fem_per', 'total', size=12, line_color="black", fill_alpha=0.8,
              source=source)
 
