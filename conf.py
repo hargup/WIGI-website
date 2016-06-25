@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import time
+import datetime
 from plots import gender_by_country
 from plots import gender_by_dob
 from plots import gender_by_culture
@@ -1012,7 +1013,7 @@ LOGGING_HANDLERS = {
 
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
-
+todays_date = datetime.datetime.today().strftime("%d %b '%y")
 GLOBAL_CONTEXT = {
         'plots' : {
             'gender_by_country': {
@@ -1031,8 +1032,8 @@ GLOBAL_CONTEXT = {
                 'newest': gender_by_dob.plot('newest'),
                 'newest_changes': gender_by_dob.plot('newest-changes')
                 }
-            }
-        }
+            },
+        'todays_date':todays_date}
 
 # Add functions here and they will be called with template
 # GLOBAL_CONTEXT as parameter when the template is about to be
