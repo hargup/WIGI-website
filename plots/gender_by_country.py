@@ -17,6 +17,7 @@ def plot(newest_changes):
     df = df[list(map(lambda x: not pd.isnull(x), df.index))]
     # drop 'NaN' Score
     df = df[list(map(lambda x: not pd.isnull(df.ix[x]['Score']), df.index))]
+    df.fillna(0, inplace=True)
 
 
     has_changes = df.abs().sum().sum() != 0

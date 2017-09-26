@@ -28,10 +28,12 @@ def plot(newest_changes):
     df['fem_per_million'] = df['fem_per'] * 10000
     df['nonbin_per_million'] = df['nonbin_per'] * 10000
 
+
     fix_nan_inf(df['fem_per'])
     fix_nan_inf(df['nonbin_per'])
     fix_nan_inf(df['fem_per_million'])
     fix_nan_inf(df['nonbin_per_million'])
+    df.fillna(0, inplace=True)
 
     # sort, process
     dfs = df.sort_values('female')
@@ -53,6 +55,7 @@ def plot(newest_changes):
     top_rows = htmltable.head(10)
     bottom_rows = htmltable[::-1].head(10)
     table = [top_rows, bottom_rows]
+
 
     return p, date_range, table, True
 

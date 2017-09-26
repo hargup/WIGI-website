@@ -49,6 +49,7 @@ def plot(newest_changes):
     cutoff = fsort_dfs[['total', 'female', 'fem_per']].reset_index()
 
     fix_nan_inf(cutoff['fem_per'])
+    cutoff.fillna(0, inplace=True)
 
     TOOLS = "pan,wheel_zoom,box_zoom,reset,hover,save,box_select"
 

@@ -28,6 +28,7 @@ def plot(newest_changes):
 
         fix_nan_inf(df['fem_per'])
         fix_nan_inf(df['nonbin_per'])
+        df.fillna(0, inplace=True)
 
         for inte in interesante:
             dox['{}-{}'.format(acro, inte)] = df[inte]
