@@ -164,7 +164,14 @@ file, and let your script use it.
 Contributors
 ============
 
-Max Klein (@notconfusing), Vivek Rai (@vivekiitkgp), Harsh Gupta (@hargup)
+Max Klein (@notconfusing), Vivek Rai (@raivivek), Harsh Gupta (@hargup)
+
+Questions?
+==========
+
+WHGI [Google Group](https://groups.google.com/forum/#!forum/wigi-project) is the
+best way to reach to us and community of users who have used WHGI.
+Alternatively, feel free to reach out to corresponding authors via email.
 
 License
 =======
