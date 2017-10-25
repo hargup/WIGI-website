@@ -173,6 +173,30 @@ WHGI [Google Group](https://groups.google.com/forum/#!forum/wigi-project) is the
 best way to reach to us and community of users who have used WHGI.
 Alternatively, feel free to reach out to corresponding authors via email.
 
+Citation
+========
+
+```
+@inproceedings{Klein:2016:MGG:2957792.2957798,
+ author = {Klein, Maximilian and Gupta, Harsh and Rai, Vivek and Konieczny, Piotr and Zhu, Haiyi},
+ title = {Monitoring the Gender Gap with Wikidata Human Gender Indicators},
+ booktitle = {Proceedings of the 12th International Symposium on Open Collaboration},
+ series = {OpenSym '16},
+ year = {2016},
+ isbn = {978-1-4503-4451-7},
+ location = {Berlin, Germany},
+ pages = {16:1--16:9},
+ articleno = {16},
+ numpages = {9},
+ url = {http://doi.acm.org/10.1145/2957792.2957798},
+ doi = {10.1145/2957792.2957798},
+ acmid = {2957798},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Biographical Database, Gender Disparities, Wikidata, Wikipedia},
+}
+```
+
 License
 =======
 
